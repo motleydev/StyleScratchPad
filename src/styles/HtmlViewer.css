@@ -1,3 +1,9 @@
 .htmlviewer-component {
-  border: 1px dashed #f00;
+	flex: 1 0 50%;
 }
+
+.htmlviewer-component pre {
+	white-space: pre-wrap;
+}
+
+

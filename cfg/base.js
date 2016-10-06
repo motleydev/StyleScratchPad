@@ -28,7 +28,11 @@ module.exports = {
     noInfo: false
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['', '.scss', '.css', '.js', '.jsx', '.json'],
+    modulesDirectories: [
+      'node_modules',
+      path.resolve(__dirname, '../node_modules')
+    ],
     alias: {
       actions: `${defaultSettings.srcPath}/actions/`,
       components: `${defaultSettings.srcPath}/components/`,
@@ -37,6 +41,10 @@ module.exports = {
       styles: `${defaultSettings.srcPath}/styles/`,
       config: `${defaultSettings.srcPath}/config/` + process.env.REACT_WEBPACK_ENV
     }
+  },
+  sassLoader: {
+    // data: '@import "styles/_config.scss";',
+    includePaths: [path.resolve(__dirname, '../src/components')]
   },
   module: {}
 };

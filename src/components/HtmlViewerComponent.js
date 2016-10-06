@@ -1,8 +1,10 @@
-"use strict";
+'use strict';
 
-import React from "react";
+import React from 'react';
 
-require("styles//HtmlViewer.css");
+var styleguideBoilerplate = require('html!../sources/styleguide.html');
+
+require('styles//HtmlViewer.css');
 
 class HtmlViewerComponent extends React.Component {
 
@@ -19,7 +21,7 @@ class HtmlViewerComponent extends React.Component {
 
   render() {
     return (
-      <div className="htmlviewer-component">
+      <div className='htmlviewer-component' dangerouslySetInnerHTML={{__html: styleguideBoilerplate}}>
 
 
       </div>
@@ -27,7 +29,7 @@ class HtmlViewerComponent extends React.Component {
   }
 }
 
-HtmlViewerComponent.displayName = "HtmlViewerComponent";
+HtmlViewerComponent.displayName = 'HtmlViewerComponent';
 
 // Uncomment properties you need
 // HtmlViewerComponent.propTypes = {};
