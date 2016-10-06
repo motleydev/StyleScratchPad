@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
-import React from 'react';
+import React from "react";
 
-require('styles//HtmlRaw.css');
+require("styles//HtmlRaw.css");
 
 let HtmlRawComponent = (props) => (
   <div className="htmlraw-component">
@@ -10,7 +10,7 @@ let HtmlRawComponent = (props) => (
   </div>
 );
 
-HtmlRawComponent.displayName = 'HtmlRawComponent';
+HtmlRawComponent.displayName = "HtmlRawComponent";
 
 // Uncomment properties you need
 // HtmlRawComponent.propTypes = {};

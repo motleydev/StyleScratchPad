@@ -1,16 +1,22 @@
 require("normalize.css/normalize.css");
-import s from "styles/App.css";
+import s from "../styles/App.css";
 
 import React from "react";
+
+import HtmlViewerComponent from "./HtmlViewerComponent";
+
+import FCBC from "./FontControlBoxComponent";
 
 class AppComponent extends React.Component {
 
 	constructor(props) {
 		super(props);
 
+    this._updateStyle = this._updateStyle.bind(this);
+
 		this.state = {
-			"typeElements": [
-				"headers": [
+			typeElements: {
+				headers: [
 					{
 						name: "h1",
 						size: 70,
@@ -75,18 +81,34 @@ class AppComponent extends React.Component {
 						kearning: 0,
 						marginAfter: 0
 					}
-				],
-			]
+				]
+			}
 		}
 	}
 
+
+  _updateStyle(props) {
+    let newState = Object.assign({}, this.state)
+    newState.typeElements.headers[props.index] = props
+    this.setState(newState)
+  }
+
   render() {
+
+    let style = ""
     return (
       <div className={ s.index }>
-        {this.state.typeElements.headers.map((el, index) => {
-        	return <div key={ index }><strong>{ el.name }</strong></div>
-        })}
-        <div className="notice">Please edit <code>src/components/Main.js</code> to get started!</div>
+
+      <style>{style}</style>
+
+        <div className={s.controller}>
+          {this.state.typeElements.headers.map((el, index) => {
+        	 return <FCBC key={ index } {...el} index={index} handleClick={this._updateStyle} />
+          })}
+        </div>
+
+        <HtmlViewerComponent />
+
       </div>
     );
   }

@@ -1,7 +1,8 @@
 /* Base Application Styles */
-body {
-  color: #fff;
-  background: #222;
+
+.index {
+  display: flex;
+  background:red;
 }
 
 .index img {
