@@ -21,7 +21,7 @@ class HtmlViewerComponent extends React.Component {
 
   render() {
     return (
-      <div className='htmlviewer-component' dangerouslySetInnerHTML={{__html: styleguideBoilerplate}}>
+      <div className='mdl-cell mdl-cell--8-col' dangerouslySetInnerHTML={{__html: styleguideBoilerplate}}>
 
 
       </div>

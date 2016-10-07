@@ -13,9 +13,15 @@ class AppComponent extends React.Component {
 		super(props);
 
     this._updateStyle = this._updateStyle.bind(this);
+    this._setFontFamily = this._setFontFamily.bind(this);
 
 		this.state = {
 			globalSize: 16,
+			fontFamilies: {
+				headers: 'MarkPro-Medium',
+				body: 'Arnhem-Blond'
+			},
+			originalFontFamiles: {},
 			typeElements: [
 					{
 						name: 'h1',
@@ -99,11 +105,26 @@ class AppComponent extends React.Component {
 		}
 	}
 
+	componentDidMount() {
+		this.setState({originalFontFamiles: { ...this.state.fontFamilies}})
+	}
 
   _updateStyle(props) {
-    let newState = Object.assign({}, this.state)
+    let newState = { ...this.state}
     newState.typeElements[props.index] = props
     this.setState(newState)
+  }
+
+  _setFontFamily(e) {
+  	e.preventDefault();
+  	let newState = { ...this.state}
+  	if (e.target.value === '') {
+  		newState.fontFamilies[e.target.id] = this.state.originalFontFamiles[e.target.id]
+  	} else {
+  		newState.fontFamilies[e.target.id] = e.target.value	
+  	}
+  	
+  	this.setState(newState)
   }
 
   render() {
@@ -116,24 +137,56 @@ class AppComponent extends React.Component {
   				font-size: ${el.size}em;
   				line-height: ${el.lineHeight};
   				letter-spacing: ${el.kearning}px;
-  				margin-bottom: ${el.marginAfter * this.state.globalSize}em;
+  				margin-bottom: ${el.marginAfter}em;
   			} `
+
+  			if (el.class === 'body') {
+  				rule += `${el.name} { font-family: ${this.state.fontFamilies.body}, serif; }`
+  			} else {
+  				rule += `${el.name} { font-family: ${this.state.fontFamilies.headers}, sans-serif; }`
+  			}
 
   			style += rule
   	})
 
     return (
-      <div className="index">
+      <div className="mdl-layout__content">
+
+      <div className="mdl-grid">
 
       <style>{style}</style>
 
-        <div className="controller">
-          {this.state.typeElements.map((el, index) => {
-        	 return <FCBC key={ index } {...el} index={index} handleClick={this._updateStyle} />
-          })}
+        <div className="mdl-cell mdl-cell--4-col">
+        	<div style={{position: "fixed"}}>
+          		{this.state.typeElements.map((el, index) => {
+        	 		return <FCBC key={ index } {...el} index={index} handleClick={this._updateStyle} />
+          		})}
+
+          		<div>
+          		<div className="mdl-textfield mdl-js-textfield">
+    			<input className="mdl-textfield__input" type="text" id="headers"
+    				value={this.state.fontFamilies.headers}
+    				onChange={this._setFontFamily}
+    			/>
+    			<label className="mdl-textfield__label" htmlFor="headers">Header Font</label>
+  				</div>
+  				</div>
+  				<div>
+  				<div className="mdl-textfield mdl-js-textfield">
+    			<input className="mdl-textfield__input" type="text" id="body"
+    				value={this.state.fontFamilies.body}
+    				onChange={this._setFontFamily}
+    			/>
+    			<label className="mdl-textfield__label" htmlFor="body">Header Font</label>
+  				</div>
+  				</div>
+
+          	</div>
         </div>
 
         <HtmlViewerComponent />
+
+        </div>
 
       </div>
     );
