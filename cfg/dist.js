@@ -10,7 +10,11 @@ let defaultSettings = require('./defaults');
 let BowerWebpackPlugin = require('bower-webpack-plugin');
 
 let config = Object.assign({}, baseConfig, {
-  entry: path.join(__dirname, '../src/index'),
+  entry: [
+    path.join(__dirname, '../src/index'),
+    path.join(__dirname, '../node_modules/material-design-lite/material.min.js'),
+    path.join(__dirname, '../node_modules/material-design-lite/material.min.css'),
+  ],
   cache: false,
   devtool: 'sourcemap',
   plugins: [

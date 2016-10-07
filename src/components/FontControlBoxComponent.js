@@ -41,15 +41,25 @@ class FontControlBoxComponent extends React.Component {
 
     const {name, size, lineHeight, kearning, marginAfter, open} = this.state;
 
+    const style = {
+      height: open ? 'auto' : 0,
+      overflow: 'hidden',
+      padding: 0
+    }
+
+    const iconStyle = {
+      float: 'right'
+    }
+
     return (
       <div className='fontcontrolbox-component'>
 
         <div onClick={this._openClose}>
         <strong>{name.toUpperCase()}</strong>
-        {open ? <i className="material-icons">keyboard_arrow_down</i> : <i className="material-icons">keyboard_arrow_left</i>}
+        {open ? <i className="material-icons" style={iconStyle}>keyboard_arrow_down</i> : <i className="material-icons" style={iconStyle}>keyboard_arrow_left</i>}
         </div>
 
-        {open && <div className="demo-list-action mdl-list">
+        <div className="demo-list-action mdl-list" style={style}>
 
           <div className="mdl-list__item">
             
@@ -179,7 +189,7 @@ class FontControlBoxComponent extends React.Component {
   
           </div>
 
-          </div>}
+          </div>
       
           <hr/>
       </div>
