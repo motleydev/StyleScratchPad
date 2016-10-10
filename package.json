@@ -63,6 +63,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "color": "^0.11.3",
     "core-js": "^2.0.0",
     "immutability-helper": "^2.0.0",
     "lost": "^7.1.0",
