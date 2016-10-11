@@ -15,6 +15,9 @@ class ColorPageComponent extends React.Component {
 	constructor(props) {
 		super(props)
 
+		this.addForegroundValue = this.addForegroundValue.bind(this)
+		this.addBackgroundValue = this.addBackgroundValue.bind(this)
+
 		this.state = {
 			foreground: [
 				{
@@ -48,7 +51,36 @@ class ColorPageComponent extends React.Component {
 	}
 
 
+  addForegroundValue(e) {
+  	e.preventDefault()
+  	let newArr = [...this.state.foreground];
+
+  	newArr.push({rgb: [0,0,0]})
+
+  	this.setState({
+  		foreground: newArr
+  	})
+	
+	m.upgradeDom()
+  }
+
+  addBackgroundValue(e) {
+  	e.preventDefault()
+  	let newArr = [...this.state.background];
+
+  	newArr.push({rgb: [0,0,0]})
+
+  	this.setState({
+  		background: newArr
+  	})
+
+  }
+
   componentDidMount() {
+  	m.upgradeDom();
+  }
+
+  componentDidUpdate(){
   	m.upgradeDom();
   }
 
@@ -56,14 +88,13 @@ class ColorPageComponent extends React.Component {
 
     return (
       
-      <div className="mdl-grid">
-      	<div className="mdl-cell mdl-cell--12-col">
-      	<table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+      <div className='mdl-grid'>
+      	<div className='mdl-cell mdl-cell--12-col'>
+      	<table className='mdl-data-table mdl-js-data-table mdl-shadow--2dp'>
   <thead>
     <tr>
-    <th>Swatch</th>
-      <th className="mdl-data-table__cell--non-numeric">RGBA</th>
-      <th className="mdl-data-table__cell--non-numeric">HEX</th>
+      <th className='mdl-data-table__cell--non-numeric' colSpan='2'>RGB</th>
+      <th className='mdl-data-table__cell--non-numeric'>HEX</th>
       {this.state.background.map((b,i)=>{
 
       	let color = Color().rgb(b.rgb);
@@ -73,12 +104,17 @@ class ColorPageComponent extends React.Component {
       		color: color.light() ? 'black' : 'white'
     	}
 
-      	return (<th key={i} className="mdl-data-table__cell--non-numeric" key={i}>
-      		<span className="mdl-chip" style={backgroundColor}>
-    			<span className="mdl-chip__text">{`Background ${i+1}`}</span>
+      	return (<th key={i} className='mdl-data-table__cell--non-numeric' key={i}>
+      		<span className='mdl-chip' style={backgroundColor}>
+    			<span className='mdl-chip__text'>{`Small | Large`}</span>
 			</span>
 		</th>)
       })}
+      <th className='mdl-data-table__cell--non-numeric'>
+        <button className="mdl-button mdl-js-button mdl-button--icon" onClick={this.addBackgroundValue}>
+  			<i className="material-icons">add_box</i>
+		</button>
+      </th>
     </tr>
   </thead>
   
@@ -86,6 +122,15 @@ class ColorPageComponent extends React.Component {
   {this.state.foreground.map((color, index) => {
       			return <ColorChip {...color} key={index} background={this.state.background}/>
       		})}
+  <tbody>
+  <tr>
+  	<td colSpan={this.state.background.length+5} style={{textAlign: 'left'}}>
+  		<button className="mdl-button mdl-js-button mdl-button--icon" onClick={this.addForegroundValue}>
+  			<i className="material-icons">add_box</i>
+		</button>
+  	</td>
+  </tr>
+  </tbody>
 
    
 </table>

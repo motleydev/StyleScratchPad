@@ -72,9 +72,10 @@ handleChange(e) {
                 <i className='material-icons'>report_problem</i> }
               </td>)
           })}
+          <td/>
         </tr>
         <tr>
-          <td colSpan={this.props.background.length+4}>
+          <td colSpan={this.props.background.length+5}>
             {[r,g,b].map((color, index)=>{
               return <input className='mdl-slider mdl-js-slider' type='range' min='0' max='255' value={color} key={index} onChange={this.handleChange} id={index}/>
             })}
