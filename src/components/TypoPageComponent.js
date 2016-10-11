@@ -121,7 +121,7 @@ class TypoPageComponent extends React.Component {
   	if (e.target.value === '') {
   		newState.fontFamilies[e.target.id] = this.state.originalFontFamiles[e.target.id]
   	} else {
-  		newState.fontFamilies[e.target.id] = e.target.value	
+  		newState.fontFamilies[e.target.id] = e.target.value
   	}
   	
   	this.setState(newState)
@@ -151,33 +151,33 @@ class TypoPageComponent extends React.Component {
   	})
 
     return (
-      <div className="mdl-layout__content">
-      <div className="mdl-grid">
+      <div className='mdl-layout__content'>
+      <div className='mdl-grid'>
 
       <style>{style}</style>
 
-        <div className="mdl-cell mdl-cell--4-col">
-        	<div style={{position: "fixed"}}>
+        <div className='mdl-cell mdl-cell--4-col'>
+        	<div style={{position: 'fixed'}}>
           		{this.state.typeElements.map((el, index) => {
         	 		return <FCBC key={ index } {...el} index={index} handleClick={this._updateStyle} />
           		})}
 
           		<div>
-          		<div className="mdl-textfield mdl-js-textfield">
-    			<input className="mdl-textfield__input" type="text" id="headers"
+          		<div className='mdl-textfield mdl-js-textfield'>
+    			<input className='mdl-textfield__input' type='text' id='headers'
     				value={this.state.fontFamilies.headers}
     				onChange={this._setFontFamily}
     			/>
-    			<label className="mdl-textfield__label" htmlFor="headers">Header Font</label>
+    			<label className='mdl-textfield__label' htmlFor='headers'>Header Font</label>
   				</div>
   				</div>
   				<div>
-  				<div className="mdl-textfield mdl-js-textfield">
-    			<input className="mdl-textfield__input" type="text" id="body"
+  				<div className='mdl-textfield mdl-js-textfield'>
+    			<input className='mdl-textfield__input' type='text' id='body'
     				value={this.state.fontFamilies.body}
     				onChange={this._setFontFamily}
     			/>
-    			<label className="mdl-textfield__label" htmlFor="body">Header Font</label>
+    			<label className='mdl-textfield__label' htmlFor='body'>Header Font</label>
   				</div>
   				</div>
 

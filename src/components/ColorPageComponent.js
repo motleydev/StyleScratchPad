@@ -6,6 +6,10 @@ require('styles//ColorPage.css');
 
 import ColorChip from './ColorChipComponent'
 
+// var Material = require('exports?componentHandler&MaterialRipple!material-design-lite/material.js');
+
+var Color = require('color');
+
 class ColorPageComponent extends React.Component {
 
 	constructor(props) {
@@ -14,46 +18,79 @@ class ColorPageComponent extends React.Component {
 		this.state = {
 			foreground: [
 				{
-					cmyk: [75,5,0,0]
+					rgb: [0,176,232]
 				},
 				{
-					cmyk: [0,85,45,0]
+					rgb: [233,66,98]
 				},
 				{
-					cmyk: [50,0,100,0]
+					rgb: [148,193,31]
 				},
 				{
-					cmyk: [0,62,97,0]
+					rgb: [239,121,15]
 				},
 				{
-					cmyk: [70,94,0,0]
+					rgb: [111,47,136]
 				}
 			],
 			background: [
 				{
-					cmyk: [0,0,0,100]
+					rgb: [29,29,27]
 				},
 				{
-					cmyk: [0,0,0,0]
+					rgb: [255,255,255]
 				},
 				{
-					cmyk: [75,5,0,0]
+					rgb: [0,176,232]
 				}
 			]
 		}
 	}
 
+
+  componentDidMount() {
+  	// Material.upgradeDom();
+  }
+
   render() {
 
     return (
-      <div className="mdl-layout__content">
+      
       <div className="mdl-grid">
-      	<div className="mdl-cell mdl-cell--4-col">
-      		{this.state.foreground.map((color, index) => {
-      			return <ColorChip {...color} key={index} />
+      	<div className="mdl-cell mdl-cell--12-col">
+      	<table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+  <thead>
+    <tr>
+    <th>Swatch</th>
+      <th className="mdl-data-table__cell--non-numeric">RGBA</th>
+      <th className="mdl-data-table__cell--non-numeric">HEX</th>
+      {this.state.background.map((b,i)=>{
+
+      	let color = Color().rgb(b.rgb);
+
+  		let backgroundColor = {
+      		background: color.rgbString(),
+      		color: color.light() ? 'black' : 'white'
+    	}
+
+      	return (<th key={i} className="mdl-data-table__cell--non-numeric" key={i}>
+      		<span className="mdl-chip" style={backgroundColor}>
+    			<span className="mdl-chip__text">{`Background ${i+1}`}</span>
+			</span>
+		</th>)
+      })}
+    </tr>
+  </thead>
+  
+   
+  {this.state.foreground.map((color, index) => {
+      			return <ColorChip {...color} key={index} background={this.state.background}/>
       		})}
+
+   
+</table>
+      		
       	</div>
-      </div>
       </div>
     );
   }

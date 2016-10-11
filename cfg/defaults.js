@@ -51,7 +51,8 @@ function getDefaultModules() {
       {
         test: /\.(mp4|ogg|svg)$/,
         loader: 'file-loader'
-      }
+      },
+      { test: /\.js$/, loader: 'exports-loader' }
     ]
   };
 }

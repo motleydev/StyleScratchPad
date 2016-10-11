@@ -56,18 +56,18 @@ class FontControlBoxComponent extends React.Component {
 
         <div onClick={this._openClose}>
         <strong>{name.toUpperCase()}</strong>
-        {open ? <i className="material-icons" style={iconStyle}>keyboard_arrow_down</i> : <i className="material-icons" style={iconStyle}>keyboard_arrow_left</i>}
+        {open ? <i className='material-icons' style={iconStyle}>keyboard_arrow_down</i> : <i className='material-icons' style={iconStyle}>keyboard_arrow_left</i>}
         </div>
 
-        <div className="demo-list-action mdl-list" style={style}>
+        <div className='demo-list-action mdl-list' style={style}>
 
-          <div className="mdl-list__item">
+          <div className='mdl-list__item'>
             
-            <span className="mdl-list__item-primary-content">
-            <i className="material-icons">format_size</i>
+            <span className='mdl-list__item-primary-content'>
+            <i className='material-icons'>format_size</i>
               <span>
                 <input
-                  className="mdl-slider mdl-js-slider"
+                  className='mdl-slider mdl-js-slider'
                   type='range'
                   value={size}
                   id='size'
@@ -77,14 +77,14 @@ class FontControlBoxComponent extends React.Component {
                   step='0.1'
                 />
               </span>
-              <span className="mdl-list__item-secondary-action" style={{width: "100px"}}>
+              <span className='mdl-list__item-secondary-action' style={{width: '100px'}}>
                 <input
-                  className="mdl-textfield__input"
-                  type="number"
-                  id="size"
+                  className='mdl-textfield__input'
+                  type='number'
+                  id='size'
                   value={size}
-                  min="0"
-                  max="10"
+                  min='0'
+                  max='10'
                   step='0.1'
                   onChange={this._handleChange}
                 />
@@ -93,13 +93,13 @@ class FontControlBoxComponent extends React.Component {
   
           </div>
         
-        <div className="mdl-list__item">
+        <div className='mdl-list__item'>
             
-            <span className="mdl-list__item-primary-content">
-            <i className="material-icons">format_line_spacing</i>
+            <span className='mdl-list__item-primary-content'>
+            <i className='material-icons'>format_line_spacing</i>
               <span>
         <input
-            className="mdl-slider mdl-js-slider"
+            className='mdl-slider mdl-js-slider'
             type='range'
             value={lineHeight}
             id='lineHeight'
@@ -109,14 +109,14 @@ class FontControlBoxComponent extends React.Component {
             step='0.1'
           />
         </span>
-        <span className="mdl-list__item-secondary-action" style={{width: "100px"}}>
+        <span className='mdl-list__item-secondary-action' style={{width: '100px'}}>
                 <input
-                  className="mdl-textfield__input"
-                  type="number"
-                  id="lineHeight"
+                  className='mdl-textfield__input'
+                  type='number'
+                  id='lineHeight'
                   value={lineHeight}
-                  min="0"
-                  max="3"
+                  min='0'
+                  max='3'
                   step='0.1'
                   onChange={this._handleChange}
                 />
@@ -125,13 +125,13 @@ class FontControlBoxComponent extends React.Component {
   
           </div>
         
-        <div className="mdl-list__item">
+        <div className='mdl-list__item'>
             
-            <span className="mdl-list__item-primary-content">
-            <i className="material-icons">swap_horiz</i>
+            <span className='mdl-list__item-primary-content'>
+            <i className='material-icons'>swap_horiz</i>
               <span>
         <input
-            className="mdl-slider mdl-js-slider"
+            className='mdl-slider mdl-js-slider'
             type='range'
             value={kearning}
             id='kearning'
@@ -141,14 +141,14 @@ class FontControlBoxComponent extends React.Component {
             step='0.1'
           />
         </span>
-        <span className="mdl-list__item-secondary-action" style={{width: "100px"}}>
+        <span className='mdl-list__item-secondary-action' style={{width: '100px'}}>
                 <input
-                  className="mdl-textfield__input"
-                  type="number"
-                  id="kearning"
+                  className='mdl-textfield__input'
+                  type='number'
+                  id='kearning'
                   value={kearning}
-                  min="0"
-                  max="10"
+                  min='0'
+                  max='10'
                   step='0.1'
                   onChange={this._handleChange}
                 />
@@ -157,13 +157,13 @@ class FontControlBoxComponent extends React.Component {
   
           </div>
         
-        <div className="mdl-list__item">
+        <div className='mdl-list__item'>
             
-            <span className="mdl-list__item-primary-content">
-            <i className="material-icons">vertical_align_bottom</i>
+            <span className='mdl-list__item-primary-content'>
+            <i className='material-icons'>vertical_align_bottom</i>
               <span>
         <input
-            className="mdl-slider mdl-js-slider"
+            className='mdl-slider mdl-js-slider'
             type='range'
             value={marginAfter}
             id='marginAfter'
@@ -173,14 +173,14 @@ class FontControlBoxComponent extends React.Component {
             step='0.1'
           />
           </span>
-          <span className="mdl-list__item-secondary-action" style={{width: "100px"}}>
+          <span className='mdl-list__item-secondary-action' style={{width: '100px'}}>
                 <input
-                  className="mdl-textfield__input"
-                  type="number"
-                  id="marginAfter"
+                  className='mdl-textfield__input'
+                  type='number'
+                  id='marginAfter'
                   value={marginAfter}
-                  min="0"
-                  max="2"
+                  min='0'
+                  max='2'
                   step='0.1'
                   onChange={this._handleChange}
                 />
