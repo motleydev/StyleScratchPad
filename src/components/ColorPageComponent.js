@@ -6,7 +6,7 @@ require('styles//ColorPage.css');
 
 import ColorChip from './ColorChipComponent'
 
-// var Material = require('exports?componentHandler&MaterialRipple!material-design-lite/material.js');
+var m = require('exports?componentHandler!material-design-lite/material.js');
 
 var Color = require('color');
 
@@ -49,7 +49,7 @@ class ColorPageComponent extends React.Component {
 
 
   componentDidMount() {
-  	// Material.upgradeDom();
+  	m.upgradeDom();
   }
 
   render() {
