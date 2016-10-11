@@ -5,27 +5,33 @@ import React from 'react';
 require('styles//ColorChip.css');
 
 import WCAG from './WcagComponent'
+import InlineEdit from './InlineEditComponent'
 
 var Color = require('color');
 
 class ColorChipComponent extends React.Component {
-  
+
   constructor(props) {
   	super(props)
     this.state = this.props
     this.handleChange = this.handleChange.bind(this)
+    this.updateValue = this.updateValue.bind(this)
   }
 
 handleChange(e) {
   e.preventDefault()
   let newRgb = [...this.state.rgb]
   newRgb[e.target.id] = parseInt(e.target.value);
-  
-  this.setState({
-    rgb: [...newRgb]
-  })
-  
 
+  this.setState({
+    rgb: [...newRgb],
+    text: Color().rgb(newRgb)
+  })
+
+}
+
+updateValue(value, index){
+    this.props.updateValue(value, index)
 }
 
   render() {
@@ -33,14 +39,9 @@ handleChange(e) {
   	let {hex, rgb, cmyk, rgba} = this.state
 
     hex,rgb,cmyk,rgba
-  	
+
   	let color = Color().rgb(rgb)
     let [r,g,b] = color.values.rgb
-
-    const backgroundColor = {
-      background: color.rgbString(),
-      color: color.light() ? 'black' : 'white'
-    }
 
     const textStyle = {
       color: color.rgbString()
@@ -50,18 +51,16 @@ handleChange(e) {
       <tbody>
         <tr>
           <td colSpan='2' className='mdl-data-table__cell--non-numeric'>
-          <span className='mdl-chip' style={backgroundColor}>
-            <span className='mdl-chip__text'>{color.rgbString()}</span>
-          </span>
-          
+          <InlineEdit updateValue={this.updateValue} text={this.state.text} index={this.props.index} pill/>
+
           </td>
           <td className='mdl-data-table__cell--non-numeric' style={textStyle}>
-          {color.hexString()}
+          <InlineEdit updateValue={this.updateValue} text={this.props.text} index={this.props.index} />
           </td>
           {this.props.background.map((b, i)=>{
-            
+
             let background = Color().rgb(b.rgb);
-            
+
             return (<td className='mdl-data-table__cell--non-numeric' style={{textAlign: 'center'}} key={i}>
 
               { WCAG.aa(color.hexString(), background.hexString()) ?

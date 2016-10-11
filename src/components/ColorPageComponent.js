@@ -5,6 +5,7 @@ import React from 'react';
 require('styles//ColorPage.css');
 
 import ColorChip from './ColorChipComponent'
+import InlineEdit from './InlineEditComponent'
 
 var m = require('exports?componentHandler!material-design-lite/material.js');
 
@@ -17,6 +18,8 @@ class ColorPageComponent extends React.Component {
 
 		this.addForegroundValue = this.addForegroundValue.bind(this)
 		this.addBackgroundValue = this.addBackgroundValue.bind(this)
+    this.updateBackgroundValue = this.updateBackgroundValue.bind(this)
+    this.updateForegroundValue = this.updateForegroundValue.bind(this)
 
 		this.state = {
 			foreground: [
@@ -51,24 +54,24 @@ class ColorPageComponent extends React.Component {
 	}
 
 
-  addForegroundValue(e) {
-  	e.preventDefault()
+  addForegroundValue(val) {
+
   	let newArr = [...this.state.foreground];
 
-  	newArr.push({rgb: [0,0,0]})
+  	newArr.push({rgb: val})
 
   	this.setState({
   		foreground: newArr
   	})
-	
+
 	m.upgradeDom()
   }
 
-  addBackgroundValue(e) {
-  	e.preventDefault()
+  addBackgroundValue(val) {
+
   	let newArr = [...this.state.background];
 
-  	newArr.push({rgb: [0,0,0]})
+  	newArr.push({rgb: val})
 
   	this.setState({
   		background: newArr
@@ -84,10 +87,32 @@ class ColorPageComponent extends React.Component {
   	m.upgradeDom();
   }
 
+  updateBackgroundValue(val, index){
+
+    let newArr = [...this.state.background];
+    newArr[index] = {rgb: val};
+
+    this.setState({
+      background: newArr
+    })
+
+  }
+
+  updateForegroundValue(val, index){
+
+    let newArr = [...this.state.foreground];
+    newArr[index] = {rgb: val};
+
+    this.setState({
+      foreground: newArr
+    })
+
+  }
+
   render() {
 
     return (
-      
+
       <div className='mdl-grid'>
       	<div className='mdl-cell mdl-cell--12-col'>
       	<table className='mdl-data-table mdl-js-data-table mdl-shadow--2dp'>
@@ -95,46 +120,42 @@ class ColorPageComponent extends React.Component {
     <tr>
       <th className='mdl-data-table__cell--non-numeric' colSpan='2'>RGB</th>
       <th className='mdl-data-table__cell--non-numeric'>HEX</th>
+
       {this.state.background.map((b,i)=>{
 
       	let color = Color().rgb(b.rgb);
 
-  		let backgroundColor = {
-      		background: color.rgbString(),
-      		color: color.light() ? 'black' : 'white'
-    	}
-
       	return (<th key={i} className='mdl-data-table__cell--non-numeric' key={i}>
-      		<span className='mdl-chip' style={backgroundColor}>
-    			<span className='mdl-chip__text'>{`Small | Large`}</span>
-			</span>
+      		<InlineEdit updateValue={this.updateBackgroundValue} text={color} index={i} pill/>
 		</th>)
       })}
       <th className='mdl-data-table__cell--non-numeric'>
-        <button className="mdl-button mdl-js-button mdl-button--icon" onClick={this.addBackgroundValue}>
-  			<i className="material-icons">add_box</i>
-		</button>
+        <InlineEdit addNewValue={this.addBackgroundValue}/>
       </th>
     </tr>
   </thead>
-  
-   
+
+
   {this.state.foreground.map((color, index) => {
-      			return <ColorChip {...color} key={index} background={this.state.background}/>
+            let fColor = Color().rgb(color.rgb);
+      			return <ColorChip {...color}
+              text={fColor}
+              key={index}
+              index={index}
+              background={this.state.background}
+              updateValue={this.updateForegroundValue}/>
       		})}
   <tbody>
   <tr>
   	<td colSpan={this.state.background.length+5} style={{textAlign: 'left'}}>
-  		<button className="mdl-button mdl-js-button mdl-button--icon" onClick={this.addForegroundValue}>
-  			<i className="material-icons">add_box</i>
-		</button>
+  		<InlineEdit addNewValue={this.addForegroundValue} />
   	</td>
   </tr>
   </tbody>
 
-   
+
 </table>
-      		
+
       	</div>
       </div>
     );

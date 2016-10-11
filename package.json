@@ -65,6 +65,7 @@
     "classnames": "^2.2.5",
     "color": "^0.11.3",
     "core-js": "^2.0.0",
+    "exports-loader": "^0.6.3",
     "immutability-helper": "^2.0.0",
     "lost": "^7.1.0",
     "material-design-icons": "^3.0.1",
