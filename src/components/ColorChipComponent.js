@@ -15,7 +15,8 @@ class ColorChipComponent extends React.Component {
   constructor(props) {
   	super(props)
     this.state = {
-      openEdits: false
+      openEdits: false,
+      originalColor: ''
     }
 
     this.openEdits = this.openEdits.bind(this)
@@ -42,6 +43,10 @@ updateValue(value, index){
 
 componentDidUpdate(){
     m.upgradeDom();
+  }
+
+  componentDidMount(){
+    this.setState({originalColor: Color().rgb(this.props.text).rgbString()})
   }
 
   render() {
@@ -120,6 +125,10 @@ componentDidUpdate(){
           
           <td colSpan={this.props.background.length+5} className='rgb-sliders mdl-data-table__cell--non-numeric'>
           <div>
+          <div className="swatches">
+            <div style={{background: this.state.originalColor, width: 50, height: 50}} />
+            <div style={{background: color.rgbString(), width: 50, height: 50}} />
+          </div>
             {[r,g,b].map((color, index)=>{
               return (
                 <div className="inputBlock" key={index}>

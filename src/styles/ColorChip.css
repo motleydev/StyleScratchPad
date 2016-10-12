@@ -25,4 +25,10 @@
 
 .rgb-sliders > div {
 	display:flex;
+	align-items:center;
+}
+
+.swatches {
+	display:flex;
+	margin-right:20px;
 }
