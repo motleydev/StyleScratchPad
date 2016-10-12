@@ -18,3 +18,11 @@
 .colorChip-card > .mdl-card__actions > .material-icons {
 	padding-right: 10px;
 }
+
+.inputBlock {
+	display:flex;
+}
+
+.rgb-sliders > div {
+	display:flex;
+}

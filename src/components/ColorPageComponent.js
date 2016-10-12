@@ -9,8 +9,6 @@ import InlineEdit from './InlineEditComponent'
 
 var m = require('exports?componentHandler!material-design-lite/material.js');
 
-var Color = require('color');
-
 class ColorPageComponent extends React.Component {
 
 	constructor(props) {
