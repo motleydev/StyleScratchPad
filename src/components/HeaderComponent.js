@@ -17,9 +17,9 @@ class HeaderComponent extends React.Component {
     return (
       <div className="demo-layout-waterfall mdl-layout mdl-js-layout">
   <header className="mdl-layout__header mdl-layout__header--waterfall">
-    
+
     <div className="mdl-layout__header-row">
-    
+
       <span className="mdl-layout-title">Title</span>
       <div className="mdl-layout-spacer"></div>
       <div className="mdl-textfield mdl-js-textfield mdl-textfield--expandable
@@ -34,15 +34,13 @@ class HeaderComponent extends React.Component {
         </div>
       </div>
     </div>
-    
+
     <div className="mdl-layout__header-row">
       <div className="mdl-layout-spacer"></div>
-    
+
       <nav className="mdl-navigation">
       	<Link className="mdl-navigation__link" to="/typography">Typography</Link>
         <Link className="mdl-navigation__link" to="/color">Color</Link>
-        <a className="mdl-navigation__link" href="">Link</a>
-        <a className="mdl-navigation__link" href="">Link</a>
       </nav>
     </div>
   </header>

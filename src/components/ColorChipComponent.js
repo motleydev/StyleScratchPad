@@ -3,6 +3,7 @@
 import React from 'react';
 
 require('styles//ColorChip.css');
+var m = require('exports?componentHandler!material-design-lite/material.js');
 
 import WCAG from './WcagComponent'
 import InlineEdit from './InlineEditComponent'
@@ -20,27 +21,23 @@ class ColorChipComponent extends React.Component {
 
 handleChange(e) {
   e.preventDefault()
-  let newRgb = [...this.state.rgb]
-  newRgb[e.target.id] = parseInt(e.target.value);
+  let newRgb = [...this.props.text]
 
-  this.setState({
-    rgb: [...newRgb],
-    text: Color().rgb(newRgb)
-  })
-
+  newRgb[e.target.id] = parseInt(e.target.value)
+  this.updateValue(newRgb, this.props.index)
 }
 
 updateValue(value, index){
     this.props.updateValue(value, index)
 }
 
+componentDidUpdate(){
+    m.upgradeDom();
+  }
+
   render() {
 
-  	let {hex, rgb, cmyk, rgba} = this.state
-
-    hex,rgb,cmyk,rgba
-
-  	let color = Color().rgb(rgb)
+  	let color = Color().rgb(this.props.text)
     let [r,g,b] = color.values.rgb
 
     const textStyle = {
@@ -51,7 +48,7 @@ updateValue(value, index){
       <tbody>
         <tr>
           <td colSpan='2' className='mdl-data-table__cell--non-numeric'>
-          <InlineEdit updateValue={this.updateValue} text={this.state.text} index={this.props.index} pill/>
+          <InlineEdit updateValue={this.updateValue} text={this.props.text} index={this.props.index} pill/>
 
           </td>
           <td className='mdl-data-table__cell--non-numeric' style={textStyle}>

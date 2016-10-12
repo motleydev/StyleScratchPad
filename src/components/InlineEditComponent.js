@@ -59,36 +59,48 @@ class InlineEditComponent extends React.Component {
 
   render() {
 
+
     let {editMode} = this.state;
+    let color = Color().rgb(this.props.text)
 
-    let color = Color(this.props.text)
+    let backgroundColor, rgb, hex
 
-    let backgroundColor = {
+    if (this.props.text) {
+
+      rgb = color.rgbString()
+      hex = color.hexString()
+
+      backgroundColor = {
          background: color.rgbString(),
          color: color.light() ? 'black' : 'white'
-     }
+      }
+
+    }
+
 
     return (
 
       <span>
-        {
-          !this.props.text && !this.state.editMode ?
+        {(!this.props.text && !editMode) &&
           <button className="mdl-button mdl-js-button mdl-button--icon" onClick={this.addValue}>
             <i className="material-icons">add_box</i>
-          </button> :
+          </button> }
 
-          !editMode ?
-          this.props.pill ?
+          {(!editMode && this.props.pill) &&
           <span className='mdl-chip' onDoubleClick={this.toggleEdit} style={backgroundColor}>
             <span className='mdl-chip__text'>{color.rgbString()}</span>
-          </span> :
-          <span onDoubleClick={this.toggleEdit}>{color.hexString()}</span> :
-          <div className="mdl-textfield mdl-js-textfield">
+          </span>}
+
+          {(!editMode && !this.props.pill) &&
+            <span onDoubleClick={this.toggleEdit}>{hex}</span>}
+
+          {editMode &&
+            <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input className="mdl-textfield__input"
               type="text"
               id="sample1"
               onBlur={this.submitValue}
-              defaultValue={this.props.text ? color.rgbString() : ''}
+              defaultValue={this.props.text ? rgb : ''}
               style={{width: 'auto'}}
               ref={(ref) => this.colorInput = ref} />
             <label className="mdl-textfield__label" htmlFor="sample1">#hex, rgb, hsl, etc…</label>

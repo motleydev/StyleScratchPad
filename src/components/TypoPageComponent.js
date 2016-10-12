@@ -4,6 +4,7 @@ import React from 'react';
 
 import HtmlViewerComponent from './HtmlViewerComponent';
 import FCBC from './FontControlBoxComponent';
+var m = require('exports?componentHandler!material-design-lite/material.js');
 
 require('styles//TypoPage.css');
 
@@ -123,10 +124,13 @@ class TypoPageComponent extends React.Component {
   	} else {
   		newState.fontFamilies[e.target.id] = e.target.value
   	}
-  	
+
   	this.setState(newState)
   }
 
+  componentDidUpdate() {
+    m.upgradeDom()
+  }
 
   render() {
 

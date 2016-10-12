@@ -121,12 +121,10 @@ class ColorPageComponent extends React.Component {
       <th className='mdl-data-table__cell--non-numeric' colSpan='2'>RGB</th>
       <th className='mdl-data-table__cell--non-numeric'>HEX</th>
 
-      {this.state.background.map((b,i)=>{
-
-      	let color = Color().rgb(b.rgb);
+      {this.state.background.map((color, i)=>{
 
       	return (<th key={i} className='mdl-data-table__cell--non-numeric' key={i}>
-      		<InlineEdit updateValue={this.updateBackgroundValue} text={color} index={i} pill/>
+      		<InlineEdit updateValue={this.updateBackgroundValue} text={color.rgb} index={i} pill/>
 		</th>)
       })}
       <th className='mdl-data-table__cell--non-numeric'>
@@ -137,9 +135,9 @@ class ColorPageComponent extends React.Component {
 
 
   {this.state.foreground.map((color, index) => {
-            let fColor = Color().rgb(color.rgb);
-      			return <ColorChip {...color}
-              text={fColor}
+            // let fColor = Color().rgb(color.rgb);
+      			return <ColorChip
+              text={color.rgb}
               key={index}
               index={index}
               background={this.state.background}
