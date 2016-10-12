@@ -37,7 +37,19 @@ class ColorPageComponent extends React.Component {
 				},
 				{
 					rgb: [111,47,136]
-				}
+				},
+        {
+          rgb: [247, 191, 191]
+        },
+        {
+          rgb: [217, 230, 177]
+        },
+        {
+          rgb: [252, 205, 163]
+        },
+        {
+          rgb: [192, 169, 210]
+        }
 			],
 			background: [
 				{
