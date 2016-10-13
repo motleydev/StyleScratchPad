@@ -24,6 +24,7 @@ class ColorChipComponent extends React.Component {
     this.updateValue = this.updateValue.bind(this)
     this.darken = this.darken.bind(this)
     this.lighten = this.lighten.bind(this)
+    this.reset = this.reset.bind(this)
   }
 
 openEdits(e){
@@ -65,12 +66,16 @@ updateValue(value, index){
     this.props.updateValue(value, index)
 }
 
+reset() {
+  this.updateValue(this.state.originalColor.rgbArray(), this.props.index)
+}
+
 componentDidUpdate(){
     m.upgradeDom();
   }
 
   componentDidMount(){
-    this.setState({originalColor: Color().rgb(this.props.text).rgbString()})
+    this.setState({originalColor: Color().rgb(this.props.text)})
   }
 
   render() {
@@ -150,7 +155,8 @@ componentDidUpdate(){
           <td colSpan={this.props.background.length+5} className='rgb-sliders mdl-data-table__cell--non-numeric'>
           <div>
           <div className="swatches">
-            <div style={{background: this.state.originalColor, width: 50, height: 50}} />
+            <div style={{background: this.state.originalColor.rgbString(), width: 50, height: 50}}
+                onClick={this.reset} />
             <div style={{background: color.rgbString(), width: 50, height: 50}} />
           </div>
             {[r,g,b].map((color, index)=>{

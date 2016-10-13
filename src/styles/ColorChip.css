@@ -33,6 +33,10 @@
 	margin-right:20px;
 }
 
+.swatches div:first-child {
+	cursor: pointer;
+}
+
 .brightnessControls button:first-child {	
 	margin-right:20px;
 }
