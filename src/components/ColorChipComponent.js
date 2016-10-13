@@ -22,6 +22,8 @@ class ColorChipComponent extends React.Component {
     this.openEdits = this.openEdits.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.updateValue = this.updateValue.bind(this)
+    this.darken = this.darken.bind(this)
+    this.lighten = this.lighten.bind(this)
   }
 
 openEdits(e){
@@ -34,6 +36,28 @@ handleChange(e) {
   let newRgb = [...this.props.text]
 
   newRgb[e.target.id] = parseInt(e.target.value)
+  this.updateValue(newRgb, this.props.index)
+}
+
+darken(e) {
+  e.preventDefault()
+
+  let color = Color().rgb(this.props.text)
+
+  color.darken(0.1)
+
+  let newRgb = [ ...color.rgbArray()]
+  this.updateValue(newRgb, this.props.index)
+}
+
+lighten(e) {
+  e.preventDefault()
+
+  let color = Color().rgb(this.props.text)
+
+  color.lighten(0.1)
+
+  let newRgb = [ ...color.rgbArray()]
   this.updateValue(newRgb, this.props.index)
 }
 
@@ -143,6 +167,14 @@ componentDidUpdate(){
                   id={index}/>
               </div>)
             })}
+            <div className="inputBlock brightnessControls">
+                <button className="mdl-button mdl-js-button mdl-button--icon" onClick={this.lighten}>
+                    <i className="material-icons">wb_sunny</i>
+                </button>
+                <button className="mdl-button mdl-js-button mdl-button--icon" onClick={this.darken}>
+                    <i className="material-icons">brightness_2</i>
+                </button>
+            </div>
             </div>
           </td>
 
