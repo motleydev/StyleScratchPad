@@ -25,6 +25,7 @@ class ColorChipComponent extends React.Component {
     this.darken = this.darken.bind(this)
     this.lighten = this.lighten.bind(this)
     this.reset = this.reset.bind(this)
+    this.remove = this.remove.bind(this)
   }
 
 openEdits(e){
@@ -64,6 +65,10 @@ lighten(e) {
 
 updateValue(value, index){
     this.props.updateValue(value, index)
+}
+
+remove() {
+  this.props.remove(this.props.index)
 }
 
 reset() {
@@ -147,6 +152,9 @@ componentDidUpdate(){
           <td>
             <button className="mdl-button mdl-js-button mdl-button--icon" onClick={this.openEdits}>
               <i className="material-icons">tune</i>
+            </button>
+            <button className="mdl-button mdl-js-button mdl-button--icon" onClick={this.remove}>
+              <i className="material-icons">close</i>
             </button>
           </td>
         </tr>
