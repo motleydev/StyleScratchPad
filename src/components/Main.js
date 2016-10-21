@@ -18,6 +18,7 @@ class AppComponent extends React.Component {
     	<Route path="/" component={HomePageComponent}>
     		<IndexRoute component={TypoPageComponent}/>
       		<Route path="typography" component={TypoPageComponent}/>
+          <Route path="color(/:foreground/:background)" component={ColorPageComponent}/>
       		<Route path="color" component={ColorPageComponent}/>
     	</Route>
   	</Router>

@@ -65,6 +65,7 @@
     "alloyeditor": "^1.2.4",
     "classnames": "^2.2.5",
     "color": "^0.11.3",
+    "copy-to-clipboard": "^3.0.5",
     "core-js": "^2.0.0",
     "exports-loader": "^0.6.3",
     "immutability-helper": "^2.0.0",
@@ -76,6 +77,7 @@
     "react": "^15.0.0",
     "react-addons-css-transition-group": "^15.3.2",
     "react-dom": "^15.0.0",
+    "react-router": "^2.8.1",
     "react-toolbox": "^1.2.1",
     "sass-loader": "^4.0.2"
   }

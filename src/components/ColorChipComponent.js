@@ -22,6 +22,10 @@ class ColorChipComponent extends React.Component {
     this.openEdits = this.openEdits.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.updateValue = this.updateValue.bind(this)
+    this.darken = this.darken.bind(this)
+    this.lighten = this.lighten.bind(this)
+    this.reset = this.reset.bind(this)
+    this.remove = this.remove.bind(this)
   }
 
 openEdits(e){
@@ -37,8 +41,38 @@ handleChange(e) {
   this.updateValue(newRgb, this.props.index)
 }
 
+darken(e) {
+  e.preventDefault()
+
+  let color = Color().rgb(this.props.text)
+
+  color.darken(0.1)
+
+  let newRgb = [ ...color.rgbArray()]
+  this.updateValue(newRgb, this.props.index)
+}
+
+lighten(e) {
+  e.preventDefault()
+
+  let color = Color().rgb(this.props.text)
+
+  color.lighten(0.1)
+
+  let newRgb = [ ...color.rgbArray()]
+  this.updateValue(newRgb, this.props.index)
+}
+
 updateValue(value, index){
     this.props.updateValue(value, index)
+}
+
+remove() {
+  this.props.remove(this.props.index)
+}
+
+reset() {
+  this.updateValue(this.state.originalColor.rgbArray(), this.props.index)
 }
 
 componentDidUpdate(){
@@ -46,7 +80,7 @@ componentDidUpdate(){
   }
 
   componentDidMount(){
-    this.setState({originalColor: Color().rgb(this.props.text).rgbString()})
+    this.setState({originalColor: Color().rgb(this.props.text)})
   }
 
   render() {
@@ -119,6 +153,9 @@ componentDidUpdate(){
             <button className="mdl-button mdl-js-button mdl-button--icon" onClick={this.openEdits}>
               <i className="material-icons">tune</i>
             </button>
+            <button className="mdl-button mdl-js-button mdl-button--icon" onClick={this.remove}>
+              <i className="material-icons">close</i>
+            </button>
           </td>
         </tr>
         {this.state.openEdits && <tr>
@@ -126,7 +163,8 @@ componentDidUpdate(){
           <td colSpan={this.props.background.length+5} className='rgb-sliders mdl-data-table__cell--non-numeric'>
           <div>
           <div className="swatches">
-            <div style={{background: this.state.originalColor, width: 50, height: 50}} />
+            <div style={{background: this.state.originalColor.rgbString(), width: 50, height: 50}}
+                onClick={this.reset} />
             <div style={{background: color.rgbString(), width: 50, height: 50}} />
           </div>
             {[r,g,b].map((color, index)=>{
@@ -143,6 +181,14 @@ componentDidUpdate(){
                   id={index}/>
               </div>)
             })}
+            <div className="inputBlock brightnessControls">
+                <button className="mdl-button mdl-js-button mdl-button--icon" onClick={this.lighten}>
+                    <i className="material-icons">wb_sunny</i>
+                </button>
+                <button className="mdl-button mdl-js-button mdl-button--icon" onClick={this.darken}>
+                    <i className="material-icons">brightness_2</i>
+                </button>
+            </div>
             </div>
           </td>
 
