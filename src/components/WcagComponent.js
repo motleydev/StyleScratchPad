@@ -61,7 +61,7 @@
 
  		let colorDifference = ((Math.max (fg.r, bg.r) - Math.min (fg.r, bg.r)) + (Math.max (fg.g, bg.g) - Math.min (fg.g, bg.g)) + (Math.max (fg.b, bg.b) - Math.min (fg.b, bg.b)));
 
- 		return colorDifference
+ 		return colorDifference >= 500
 
  	}
 
@@ -75,7 +75,7 @@
 
  		let brightnessDifference = Math.round(Math.abs(bY-fY));
 
- 		return brightnessDifference;
+ 		return brightnessDifference >= 125;
 
  	}
 
@@ -102,8 +102,8 @@
  		} else {
  			bg = WCAG.hexToRgb(background)
  		}
- 		
- 		
+
+
  		let ratio = 1;
  		let l1 = WCAG.hexGetLuminance([fg.r/255, fg.g/255, fg.b/255]);
  		let l2 = WCAG.hexGetLuminance([bg.r/255, bg.g/255, bg.b/255]);
