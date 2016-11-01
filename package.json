@@ -79,6 +79,7 @@
     "react-dom": "^15.0.0",
     "react-router": "^2.8.1",
     "react-toolbox": "^1.2.1",
-    "sass-loader": "^4.0.2"
+    "sass-loader": "^4.0.2",
+    "xml-loader": "^1.1.0"
   }
 }

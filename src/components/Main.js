@@ -4,6 +4,7 @@ require('styles//App.css');
 import React from 'react';
 
 import TypoPageComponent from './TypoPageComponent';
+import DummyTextComponent from './DummyTextComponent';
 import ColorPageComponent from './ColorPageComponent';
 import HomePageComponent from './HomePageComponent';
 
@@ -18,6 +19,7 @@ class AppComponent extends React.Component {
     	<Route path="/" component={HomePageComponent}>
     		<IndexRoute component={TypoPageComponent}/>
       		<Route path="typography" component={TypoPageComponent}/>
+          <Route path="dummy-text" component={DummyTextComponent}/>
           <Route path="color(/:foreground/:background)" component={ColorPageComponent}/>
       		<Route path="color" component={ColorPageComponent}/>
     	</Route>

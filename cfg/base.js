@@ -5,12 +5,20 @@ let defaultSettings = require('./defaults');
 // Additional npm or bower modules to include in builds
 // Add all foreign plugins you may need into this array
 // @example:
-// let npmBase = path.join(__dirname, '../node_modules');
+let npmBase = path.join(__dirname, '../node_modules');
 // let additionalPaths = [ path.join(npmBase, 'react-bootstrap') ];
+
+let requiredFiles = [
+  path.join(npmBase, 'material-design-lite/material.min.js'),
+  path.join(npmBase, 'material-design-lite/material.min.css'),
+  path.join(__dirname, '../src/sources/demo.css'),
+]
+
 let additionalPaths = [];
 
 module.exports = {
   additionalPaths: additionalPaths,
+  requiredFiles: requiredFiles,
   port: defaultSettings.port,
   debug: true,
   devtool: 'eval',

@@ -13,8 +13,7 @@ let config = Object.assign({}, baseConfig, {
     'webpack-dev-server/client?http://127.0.0.1:' + defaultSettings.port,
     'webpack/hot/only-dev-server',
     './src/index',
-    'material-design-lite/material.min.js',
-    'material-design-lite/material.min.css',
+    ...baseConfig.requiredFiles
   ],
   cache: true,
   devtool: 'eval-source-map',

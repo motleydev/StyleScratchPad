@@ -2,9 +2,15 @@
 
 import React from 'react';
 
+const markPro = require('xml!../sources/fonts_src/fontlist.xml');
+let markProProcess = markPro.fonts.font.map( (font) => {return font.$.CssFamilyName})
+
 import HtmlViewerComponent from './HtmlViewerComponent';
+import FlexDown from './FlexDownComponent';
 import FCBC from './FontControlBoxComponent';
 var m = require('exports?componentHandler!material-design-lite/material.js');
+
+var styleguideBoilerplate = require('html!../sources/styleguide.html');
 
 require('styles//TypoPage.css');
 
@@ -15,11 +21,27 @@ class TypoPageComponent extends React.Component {
 
     this._updateStyle = this._updateStyle.bind(this);
     this._setFontFamily = this._setFontFamily.bind(this);
+    this.updateSelection = this.updateSelection.bind(this);
+    // this._filterFontFamily = this._filterFontFamily.bind(this);
+    // this._setDefaultFont = this._setDefaultFont.bind(this);
+    let manFonts = ['Arnhem-Black',
+    'Arnhem-BlackItalic',
+    'Arnhem-Blond',
+    'Arnhem-BlondItalic',
+    'Arnhem-Bold',
+    'Arnhem-BoldItalic',
+    'Arnhem-Normal',
+    'Arnhem-NormalItalic',
+    'Georgia',
+    'Arial']
 
 		this.state = {
 			globalSize: 16,
+
+			allFonts: [...markProProcess, ...manFonts],
+
 			fontFamilies: {
-				headers: 'MarkPro-Medium',
+				headers: 'Mark W01 Bold',
 				body: 'Arnhem-Blond'
 			},
 			originalFontFamiles: {},
@@ -107,7 +129,11 @@ class TypoPageComponent extends React.Component {
 	}
 
 	componentDidMount() {
-		this.setState({originalFontFamiles: { ...this.state.fontFamilies}})
+
+		this.setState({
+			originalFontFamiles: { ...this.state.fontFamilies},
+			allFontsMaster: [...this.state.allFonts]
+		})
 	}
 
   _updateStyle(props) {
@@ -115,6 +141,8 @@ class TypoPageComponent extends React.Component {
     newState.typeElements[props.index] = props
     this.setState(newState)
   }
+
+  
 
   _setFontFamily(e) {
   	e.preventDefault();
@@ -130,6 +158,10 @@ class TypoPageComponent extends React.Component {
 
   componentDidUpdate() {
     m.upgradeDom()
+  }
+
+  updateSelection(obj) {
+  	this.setState({...this.state, ...obj})
   }
 
   render() {
@@ -161,34 +193,28 @@ class TypoPageComponent extends React.Component {
       <style>{style}</style>
 
         <div className='mdl-cell mdl-cell--4-col'>
-        	<div style={{position: 'fixed'}}>
+        	<div>
           		{this.state.typeElements.map((el, index) => {
         	 		return <FCBC key={ index } {...el} index={index} handleClick={this._updateStyle} />
           		})}
 
           		<div>
-          		<div className='mdl-textfield mdl-js-textfield'>
-    			<input className='mdl-textfield__input' type='text' id='headers'
-    				value={this.state.fontFamilies.headers}
-    				onChange={this._setFontFamily}
-    			/>
-    			<label className='mdl-textfield__label' htmlFor='headers'>Header Font</label>
-  				</div>
-  				</div>
-  				<div>
-  				<div className='mdl-textfield mdl-js-textfield'>
-    			<input className='mdl-textfield__input' type='text' id='body'
-    				value={this.state.fontFamilies.body}
-    				onChange={this._setFontFamily}
-    			/>
-    			<label className='mdl-textfield__label' htmlFor='body'>Header Font</label>
-  				</div>
+          		<FlexDown
+    				fonts={this.state.allFonts}
+    				initial={this.state.fontFamilies['headers']}
+    				label='headers'
+    				updateSelection={this.updateSelection} />
+    			<FlexDown
+    				fonts={this.state.allFonts}
+    				initial={this.state.fontFamilies['body']}
+    				label='body'
+    				updateSelection={this.updateSelection} />
   				</div>
 
           	</div>
         </div>
 
-        <HtmlViewerComponent />
+        <HtmlViewerComponent html={styleguideBoilerplate} />
 
         </div>
 

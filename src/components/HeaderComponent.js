@@ -20,14 +20,16 @@ class HeaderComponent extends React.Component {
 
     <div className="mdl-layout__header-row">
 
-      <span className="mdl-layout-title">Title</span>
+      <span className="mdl-layout-title">Smart Styler</span>
       <div className="mdl-layout-spacer"></div>
       <div className="mdl-textfield mdl-js-textfield mdl-textfield--expandable
                   mdl-textfield--floating-label mdl-textfield--align-right">
-        <label className="mdl-button mdl-js-button mdl-button--icon"
-               htmlFor="waterfall-exp">
-          <i className="material-icons">search</i>
-        </label>
+       
+       {1+1===3 && <label className="mdl-button mdl-js-button mdl-button--icon"
+                      htmlFor="waterfall-exp">
+                 <i className="material-icons">search</i>
+               </label>}
+       
         <div className="mdl-textfield__expandable-holder">
           <input className="mdl-textfield__input" type="text" name="sample"
                  id="waterfall-exp" />
@@ -40,19 +42,20 @@ class HeaderComponent extends React.Component {
 
       <nav className="mdl-navigation">
       	<Link className="mdl-navigation__link" to="/typography">Typography</Link>
+        <Link className="mdl-navigation__link" to="/dummy-text">Dummy Text</Link>
         <Link className="mdl-navigation__link" to="/color">Color</Link>
       </nav>
     </div>
   </header>
   <div className="mdl-layout__drawer">
-    <span className="mdl-layout-title">Title</span>
-    <nav className="mdl-navigation">
-      <a className="mdl-navigation__link" href="">Link</a>
-      <a className="mdl-navigation__link" href="">Link</a>
-      <a className="mdl-navigation__link" href="">Link</a>
-      <a className="mdl-navigation__link" href="">Link</a>
-    </nav>
-  </div>
+      <span className="mdl-layout-title">Title</span>
+      <nav className="mdl-navigation">
+        <a className="mdl-navigation__link" href="">Link</a>
+        <a className="mdl-navigation__link" href="">Link</a>
+        <a className="mdl-navigation__link" href="">Link</a>
+        <a className="mdl-navigation__link" href="">Link</a>
+      </nav>
+    </div>
   <main className="mdl-layout__content">
     <div className="page-content">
 
