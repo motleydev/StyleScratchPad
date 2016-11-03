@@ -3,6 +3,7 @@
 import React from 'react';
 
 import { Link } from 'react-router'
+// import TypeController from './TypeControllerComponent'
 
 
 require('styles//Header.css');
@@ -48,12 +49,8 @@ class HeaderComponent extends React.Component {
     </div>
   </header>
   <div className="mdl-layout__drawer">
-      <span className="mdl-layout-title">Title</span>
+      <span className="mdl-layout-title">Typo</span>
       <nav className="mdl-navigation">
-        <a className="mdl-navigation__link" href="">Link</a>
-        <a className="mdl-navigation__link" href="">Link</a>
-        <a className="mdl-navigation__link" href="">Link</a>
-        <a className="mdl-navigation__link" href="">Link</a>
       </nav>
     </div>
   <main className="mdl-layout__content">

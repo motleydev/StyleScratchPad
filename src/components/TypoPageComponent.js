@@ -5,9 +5,17 @@ import React from 'react';
 const markPro = require('xml!../sources/fonts_src/fontlist.xml');
 let markProProcess = markPro.fonts.font.map( (font) => {return font.$.CssFamilyName})
 
+
+import {connect} from 'react-redux'
+
+// import {bindActionCreators} from 'redux'
+
+// import getTypeSettings from '../reducers'
+
 import HtmlViewerComponent from './HtmlViewerComponent';
-import FlexDown from './FlexDownComponent';
-import FCBC from './FontControlBoxComponent';
+
+import TypeController from './TypeControllerComponent'
+
 var m = require('exports?componentHandler!material-design-lite/material.js');
 
 var styleguideBoilerplate = require('html!../sources/styleguide.html');
@@ -20,10 +28,10 @@ class TypoPageComponent extends React.Component {
 		super(props);
 
     this._updateStyle = this._updateStyle.bind(this);
-    this._setFontFamily = this._setFontFamily.bind(this);
     this.updateSelection = this.updateSelection.bind(this);
     // this._filterFontFamily = this._filterFontFamily.bind(this);
     // this._setDefaultFont = this._setDefaultFont.bind(this);
+    
     let manFonts = ['Arnhem-Black',
     'Arnhem-BlackItalic',
     'Arnhem-Blond',
@@ -44,87 +52,7 @@ class TypoPageComponent extends React.Component {
 				headers: 'Mark W01 Bold',
 				body: 'Arnhem-Blond'
 			},
-			originalFontFamiles: {},
-			typeElements: [
-					{
-						name: 'h1',
-						size: 5.75,
-						lineHeight: 1.25,
-						kearning: 0,
-						marginAfter: 0,
-						class: 'header'
-					}, {
-						name: 'h2',
-						size: 4.75,
-						lineHeight: 1.25,
-						kearning: 0,
-						marginAfter: 0,
-						class: 'header'
-					}, {
-						name: 'h3',
-						size: 3.75,
-						lineHeight: 1.25,
-						kearning: 0,
-						marginAfter: 0,
-						class: 'header'
-					}, {
-						name: 'h4',
-						size: 2.5,
-						lineHeight: 1.25,
-						kearning: 0,
-						marginAfter: 0,
-						class: 'header'
-					}, {
-						name: 'h5',
-						size: 1.75,
-						lineHeight: 1.25,
-						kearning: 0,
-						marginAfter: 0,
-						class: 'header'
-					}, {
-						name: 'h6',
-						size: 1.75,
-						lineHeight: 1.25,
-						kearning: 0,
-						marginAfter: 0,
-						class: 'header'
-					}, {
-						name: 'p',
-						size: 1.25,
-						lineHeight: 1.25,
-						kearning: 0,
-						marginAfter: 0,
-						class: 'body'
-					}, {
-						name: 'li',
-						size: 1.25,
-						lineHeight: 1.25,
-						kearning: 0,
-						marginAfter: 0,
-						class: 'body'
-					}, {
-						name: 'small',
-						size: 0.75,
-						lineHeight: 1.25,
-						kearning: 0,
-						marginAfter: 0,
-						class: 'body'
-					}, {
-						name: 'pre',
-						size: 1.25,
-						lineHeight: 1.25,
-						kearning: 0,
-						marginAfter: 0,
-						class: 'body'
-					}, {
-						name: 'label',
-						size: 1,
-						lineHeight: 1.25,
-						kearning: 0,
-						marginAfter: 0,
-						class: 'body'
-					}
-				]
+			originalFontFamiles: {}
 		}
 	}
 
@@ -142,33 +70,23 @@ class TypoPageComponent extends React.Component {
     this.setState(newState)
   }
 
-  
-
-  _setFontFamily(e) {
-  	e.preventDefault();
-  	let newState = { ...this.state}
-  	if (e.target.value === '') {
-  		newState.fontFamilies[e.target.id] = this.state.originalFontFamiles[e.target.id]
-  	} else {
-  		newState.fontFamilies[e.target.id] = e.target.value
-  	}
-
-  	this.setState(newState)
-  }
 
   componentDidUpdate() {
     m.upgradeDom()
   }
 
   updateSelection(obj) {
-  	this.setState({...this.state, ...obj})
+  	let newFontFamilies = Object.assign(this.state.fontFamilies, obj.fontFamilies)
+  	this.setState({fontFamilies: newFontFamilies})
   }
 
   render() {
 
   	let style = ''
 
-  	this.state.typeElements.map((el) => {
+  	if (this.props.typeElements) {
+
+  		this.props.typeElements.map((el) => {
   		let rule = `
   			${el.name} {
   				font-size: ${el.size}em;
@@ -186,34 +104,16 @@ class TypoPageComponent extends React.Component {
   			style += rule
   	})
 
+  	}
+  	
+
     return (
       <div className='mdl-layout__content'>
       <div className='mdl-grid'>
 
       <style>{style}</style>
 
-        <div className='mdl-cell mdl-cell--4-col'>
-        	<div>
-          		{this.state.typeElements.map((el, index) => {
-        	 		return <FCBC key={ index } {...el} index={index} handleClick={this._updateStyle} />
-          		})}
-
-          		<div>
-          		<FlexDown
-    				fonts={this.state.allFonts}
-    				initial={this.state.fontFamilies['headers']}
-    				label='headers'
-    				updateSelection={this.updateSelection} />
-    			<FlexDown
-    				fonts={this.state.allFonts}
-    				initial={this.state.fontFamilies['body']}
-    				label='body'
-    				updateSelection={this.updateSelection} />
-  				</div>
-
-          	</div>
-        </div>
-
+      	<TypeController />
         <HtmlViewerComponent html={styleguideBoilerplate} />
 
         </div>
@@ -223,10 +123,29 @@ class TypoPageComponent extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    typeElements: state.typeElements
+  }
+}
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     onTodoClick: (id) => {
+//       dispatch(toggleTodo(id))
+//     }
+//   }
+// }
+
+const ConnectedTypoPageComponent = connect(
+  mapStateToProps
+  // mapDispatchToProps
+)(TypoPageComponent)
+
 TypoPageComponent.displayName = 'TypoPageComponent';
 
 // Uncomment properties you need
 // TypoPageComponent.propTypes = {};
 // TypoPageComponent.defaultProps = {};
 
-export default TypoPageComponent;
+export default ConnectedTypoPageComponent;

@@ -72,7 +72,7 @@ class FlexDownComponent extends React.Component {
 
     }
 
-    chooseFont(index) {
+    chooseFont(index, e) {
 
         let newFontFamilies = {
             fontFamilies: {}
@@ -85,17 +85,21 @@ class FlexDownComponent extends React.Component {
 
     }
 
+    componentDidUpdate() {
+        console.log(this.props.initial)
+    }
+
     render() {
 
         return (
             <div className="flexDown">
  				<div className='mdl-textfield mdl-js-textfield'>
- 					<input className='mdl-textfield__input' type='text' id='body'
+ 					<input className='mdl-textfield__input' type='text' id={this.props.label}
             			value={this.state.initial}
             			onChange={this.filterFontFamily}
             			onBlur={this.setDefaultFont}
             		/>
- 					<label className='mdl-textfield__label' htmlFor='body'>Header Font</label>
+ 					<label className='mdl-textfield__label' htmlFor={this.props.label}>Header Font</label>
  				</div>
  			{this.state.allFonts.map((font, index) => {
                 return <div onClick={(e) => this.chooseFont(index, e)} key={index}>{font}</div>
