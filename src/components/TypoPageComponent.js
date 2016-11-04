@@ -1,11 +1,6 @@
 'use strict';
 
 import React from 'react';
-
-const markPro = require('xml!../sources/fonts_src/fontlist.xml');
-let markProProcess = markPro.fonts.font.map( (font) => {return font.$.CssFamilyName})
-
-
 import {connect} from 'react-redux'
 
 // import {bindActionCreators} from 'redux'
@@ -27,57 +22,22 @@ class TypoPageComponent extends React.Component {
 	constructor(props) {
 		super(props);
 
-    this._updateStyle = this._updateStyle.bind(this);
-    this.updateSelection = this.updateSelection.bind(this);
-    // this._filterFontFamily = this._filterFontFamily.bind(this);
-    // this._setDefaultFont = this._setDefaultFont.bind(this);
-    
-    let manFonts = ['Arnhem-Black',
-    'Arnhem-BlackItalic',
-    'Arnhem-Blond',
-    'Arnhem-BlondItalic',
-    'Arnhem-Bold',
-    'Arnhem-BoldItalic',
-    'Arnhem-Normal',
-    'Arnhem-NormalItalic',
-    'Georgia',
-    'Arial']
-
 		this.state = {
 			globalSize: 16,
-
-			allFonts: [...markProProcess, ...manFonts],
-
-			fontFamilies: {
-				headers: 'Mark W01 Bold',
-				body: 'Arnhem-Blond'
-			},
 			originalFontFamiles: {}
 		}
 	}
 
 	componentDidMount() {
 
-		this.setState({
-			originalFontFamiles: { ...this.state.fontFamilies},
-			allFontsMaster: [...this.state.allFonts]
-		})
+		// this.setState({
+		// 	originalFontFamiles: { ...this.props.fontFamilies},
+		// 	allFontsMaster: [...this.props.allFonts]
+		// })
 	}
-
-  _updateStyle(props) {
-    let newState = { ...this.state}
-    newState.typeElements[props.index] = props
-    this.setState(newState)
-  }
-
 
   componentDidUpdate() {
     m.upgradeDom()
-  }
-
-  updateSelection(obj) {
-  	let newFontFamilies = Object.assign(this.state.fontFamilies, obj.fontFamilies)
-  	this.setState({fontFamilies: newFontFamilies})
   }
 
   render() {
@@ -96,9 +56,9 @@ class TypoPageComponent extends React.Component {
   			} `
 
   			if (el.class === 'body') {
-  				rule += `${el.name} { font-family: ${this.state.fontFamilies.body}, serif; }`
+  				rule += `${el.name} { font-family: ${this.props.fontFamilies.body}, serif; }`
   			} else {
-  				rule += `${el.name} { font-family: ${this.state.fontFamilies.headers}, sans-serif; }`
+  				rule += `${el.name} { font-family: ${this.props.fontFamilies.headers}, sans-serif; }`
   			}
 
   			style += rule
@@ -124,9 +84,7 @@ class TypoPageComponent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    typeElements: state.typeElements
-  }
+  return {...state}
 }
 
 // const mapDispatchToProps = (dispatch) => {

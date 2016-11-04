@@ -1,142 +1,61 @@
 'use strict';
 
 import React from 'react';
+import {connect} from 'react-redux'
+
+// import {bindActionCreators} from 'redux'
+
+// import getTypeSettings from '../reducers'
+
 import HtmlViewerComponent from './HtmlViewerComponent';
-import FCBC from './FontControlBoxComponent';
+
+import TypeController from './TypeControllerComponent'
+
 var m = require('exports?componentHandler!material-design-lite/material.js');
 
-const styleguideDummyText = require('html!../sources/dummyText.html');
+var styleguideBoilerplate = require('html!../sources/dummyText.html');
 
-require('styles//DummyText.css');
+require('styles//TypoPage.css');
 
 class DummyTextComponent extends React.Component {
-  constructor(props) {
+
+	constructor(props) {
 		super(props);
 
-    this._updateStyle = this._updateStyle.bind(this);
-    this._setFontFamily = this._setFontFamily.bind(this);
+    this.updateSelection = this.updateSelection.bind(this);
+    // this._filterFontFamily = this._filterFontFamily.bind(this);
+    // this._setDefaultFont = this._setDefaultFont.bind(this);
 
 		this.state = {
 			globalSize: 16,
-			fontFamilies: {
-				headers: 'MarkPro-Medium',
-				body: 'Arnhem-Blond'
-			},
-			originalFontFamiles: {},
-			typeElements: [
-					{
-						name: 'h1',
-						size: 5.75,
-						lineHeight: 1.25,
-						kearning: 0,
-						marginAfter: 0,
-						class: 'header'
-					}, {
-						name: 'h2',
-						size: 4.75,
-						lineHeight: 1.25,
-						kearning: 0,
-						marginAfter: 0,
-						class: 'header'
-					}, {
-						name: 'h3',
-						size: 3.75,
-						lineHeight: 1.25,
-						kearning: 0,
-						marginAfter: 0,
-						class: 'header'
-					}, {
-						name: 'h4',
-						size: 2.5,
-						lineHeight: 1.25,
-						kearning: 0,
-						marginAfter: 0,
-						class: 'header'
-					}, {
-						name: 'h5',
-						size: 1.75,
-						lineHeight: 1.25,
-						kearning: 0,
-						marginAfter: 0,
-						class: 'header'
-					}, {
-						name: 'h6',
-						size: 1.75,
-						lineHeight: 1.25,
-						kearning: 0,
-						marginAfter: 0,
-						class: 'header'
-					}, {
-						name: 'p',
-						size: 1.25,
-						lineHeight: 1.25,
-						kearning: 0,
-						marginAfter: 0,
-						class: 'body'
-					}, {
-						name: 'li',
-						size: 1.25,
-						lineHeight: 1.25,
-						kearning: 0,
-						marginAfter: 0,
-						class: 'body'
-					}, {
-						name: 'small',
-						size: 0.75,
-						lineHeight: 1.25,
-						kearning: 0,
-						marginAfter: 0,
-						class: 'body'
-					}, {
-						name: 'pre',
-						size: 1.25,
-						lineHeight: 1.25,
-						kearning: 0,
-						marginAfter: 0,
-						class: 'body'
-					}, {
-						name: 'label',
-						size: 1,
-						lineHeight: 1.25,
-						kearning: 0,
-						marginAfter: 0,
-						class: 'body'
-					}
-				]
+			originalFontFamiles: {}
 		}
 	}
 
 	componentDidMount() {
-		this.setState({originalFontFamiles: { ...this.state.fontFamilies}})
+
+		// this.setState({
+		// 	originalFontFamiles: { ...this.props.fontFamilies},
+		// 	allFontsMaster: [...this.props.allFonts]
+		// })
 	}
-
-  _updateStyle(props) {
-    let newState = { ...this.state}
-    newState.typeElements[props.index] = props
-    this.setState(newState)
-  }
-
-  _setFontFamily(e) {
-  	e.preventDefault();
-  	let newState = { ...this.state}
-  	if (e.target.value === '') {
-  		newState.fontFamilies[e.target.id] = this.state.originalFontFamiles[e.target.id]
-  	} else {
-  		newState.fontFamilies[e.target.id] = e.target.value
-  	}
-
-  	this.setState(newState)
-  }
 
   componentDidUpdate() {
     m.upgradeDom()
+  }
+
+  updateSelection(obj) {
+  	let newFontFamilies = Object.assign(this.props.fontFamilies, obj.fontFamilies)
+  	// this.setState({fontFamilies: newFontFamilies})
   }
 
   render() {
 
   	let style = ''
 
-  	this.state.typeElements.map((el) => {
+  	if (this.props.typeElements) {
+
+  		this.props.typeElements.map((el) => {
   		let rule = `
   			${el.name} {
   				font-size: ${el.size}em;
@@ -146,13 +65,16 @@ class DummyTextComponent extends React.Component {
   			} `
 
   			if (el.class === 'body') {
-  				rule += `${el.name} { font-family: ${this.state.fontFamilies.body}, serif; }`
+  				rule += `${el.name} { font-family: ${this.props.fontFamilies.body}, serif; }`
   			} else {
-  				rule += `${el.name} { font-family: ${this.state.fontFamilies.headers}, sans-serif; }`
+  				rule += `${el.name} { font-family: ${this.props.fontFamilies.headers}, sans-serif; }`
   			}
 
   			style += rule
   	})
+
+  	}
+  	
 
     return (
       <div className='mdl-layout__content'>
@@ -160,35 +82,8 @@ class DummyTextComponent extends React.Component {
 
       <style>{style}</style>
 
-        <div className='mdl-cell mdl-cell--4-col'>
-        	<div style={{position: 'fixed'}}>
-          		{this.state.typeElements.map((el, index) => {
-        	 		return <FCBC key={ index } {...el} index={index} handleClick={this._updateStyle} />
-          		})}
-
-          		<div>
-          		<div className='mdl-textfield mdl-js-textfield'>
-    			<input className='mdl-textfield__input' type='text' id='headers'
-    				value={this.state.fontFamilies.headers}
-    				onChange={this._setFontFamily}
-    			/>
-    			<label className='mdl-textfield__label' htmlFor='headers'>Header Font</label>
-  				</div>
-  				</div>
-  				<div>
-  				<div className='mdl-textfield mdl-js-textfield'>
-    			<input className='mdl-textfield__input' type='text' id='body'
-    				value={this.state.fontFamilies.body}
-    				onChange={this._setFontFamily}
-    			/>
-    			<label className='mdl-textfield__label' htmlFor='body'>Header Font</label>
-  				</div>
-  				</div>
-
-          	</div>
-        </div>
-
-        <HtmlViewerComponent html={styleguideDummyText}/>
+      	<TypeController />
+        <HtmlViewerComponent html={styleguideBoilerplate} />
 
         </div>
 
@@ -197,10 +92,27 @@ class DummyTextComponent extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {...state}
+}
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     onTodoClick: (id) => {
+//       dispatch(toggleTodo(id))
+//     }
+//   }
+// }
+
+const ConnectedDummyTextComponent = connect(
+  mapStateToProps
+  // mapDispatchToProps
+)(DummyTextComponent)
+
 DummyTextComponent.displayName = 'DummyTextComponent';
 
 // Uncomment properties you need
 // DummyTextComponent.propTypes = {};
 // DummyTextComponent.defaultProps = {};
 
-export default DummyTextComponent;
+export default ConnectedDummyTextComponent;

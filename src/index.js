@@ -26,14 +26,15 @@ let manFonts = ['Arnhem-Black',
 // let appstate = {
 //     globalSize: 16,
 
-//     fontFamilies: {
-//         headers: 'Mark W01 Bold',
-//         body: 'Arnhem-Blond'
-//     },
+
 //     originalFontFamiles: {},
 // }
 
 let appState = {
+    fontFamilies: {
+        headers: 'Mark W01 Bold',
+        body: 'Arnhem-Blond'
+    },
     allFonts: [...markProProcess, ...manFonts],
     typeElements: [
         {
@@ -117,11 +118,7 @@ let appState = {
     ]
 }
 
-let store = createStore(styleApp, {
-    typeElements: appState.typeElements,
-    allFonts: appState.allFonts
-
-})
+let store = createStore(styleApp, appState)
 
 // Render the main component into the dom
 ReactDOM.render(

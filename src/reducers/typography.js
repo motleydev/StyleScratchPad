@@ -1,23 +1,12 @@
-const typeset = (state = {}, action) => {
-  switch (action.type) {
-    case 'UPDATE_TYPESET':
-
-      return Object.assign({}, state, action)
-
-    default:
-      return state
-  }
-}
 
 const getTypeSettings = (state = [], action) => {
   switch (action.type) {
-    case 'UPDATE_TYPESETTINGS':
-      
+    case 'UPDATE_TYPE_SETTINGS':
       let newArr = [...state]
-      newArr[index] = typeset(action)
+      newArr[action.index] = action.payload
       return newArr
 
-    default:
+  default:
       return state
   }
 }

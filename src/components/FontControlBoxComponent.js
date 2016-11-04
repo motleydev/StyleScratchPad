@@ -17,7 +17,7 @@ class FontControlBoxComponent extends React.Component {
   }
 
   _handleClick(props) {
-    this.props.handleClick(props)
+    this.props.handleClick(this.props.index, props)
   }
 
   _handleChange(event) {

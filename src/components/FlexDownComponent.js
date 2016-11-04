@@ -85,10 +85,6 @@ class FlexDownComponent extends React.Component {
 
     }
 
-    componentDidUpdate() {
-        console.log(this.props.initial)
-    }
-
     render() {
 
         return (

@@ -11,7 +11,7 @@
 
 const getFontFaces = (state = [], action) => {
   switch (action.type) {
-    case 'UPDATE_TYPESETTINGS':
+    case 'UPDATE_TYPE_FONT_FACES':
       
       let newArr = [...state]
       newArr[index] = typeset(action)

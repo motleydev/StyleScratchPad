@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux'
-import typeElements from './typography'
+import getTypeSettings from './typography'
 import getFontFaces from './fontfaces'
+import getFontFamilies from './fontfamilies'
 
 const styleApp = combineReducers({
-  typeElements: typeElements,
-  allFonts: getFontFaces
+  typeElements: getTypeSettings,
+  allFonts: getFontFaces,
+  fontFamilies: getFontFamilies
 })
 
 export default styleApp
