@@ -1,11 +1,6 @@
 'use strict';
 
 import React from 'react';
-import {connect} from 'react-redux'
-
-// import {bindActionCreators} from 'redux'
-
-// import getTypeSettings from '../reducers'
 
 import HtmlViewerComponent from './HtmlViewerComponent';
 
@@ -27,17 +22,8 @@ class DummyTextComponent extends React.Component {
     // this._setDefaultFont = this._setDefaultFont.bind(this);
 
 		this.state = {
-			globalSize: 16,
-			originalFontFamiles: {}
+			globalSize: 16
 		}
-	}
-
-	componentDidMount() {
-
-		// this.setState({
-		// 	originalFontFamiles: { ...this.props.fontFamilies},
-		// 	allFontsMaster: [...this.props.allFonts]
-		// })
 	}
 
   componentDidUpdate() {
@@ -50,64 +36,16 @@ class DummyTextComponent extends React.Component {
   }
 
   render() {
-
-  	let style = ''
-
-  	if (this.props.typeElements) {
-
-  		this.props.typeElements.map((el) => {
-  		let rule = `
-  			${el.name} {
-  				font-size: ${el.size}em;
-  				line-height: ${el.lineHeight};
-  				letter-spacing: ${el.kearning}px;
-  				margin-bottom: ${el.marginAfter}em;
-  			} `
-
-  			if (el.class === 'body') {
-  				rule += `${el.name} { font-family: ${this.props.fontFamilies.body}, serif; }`
-  			} else {
-  				rule += `${el.name} { font-family: ${this.props.fontFamilies.headers}, sans-serif; }`
-  			}
-
-  			style += rule
-  	})
-
-  	}
-  	
-
     return (
-      <div className='mdl-layout__content'>
       <div className='mdl-grid'>
-
-      <style>{style}</style>
 
       	<TypeController />
         <HtmlViewerComponent html={styleguideBoilerplate} />
-
-        </div>
 
       </div>
     );
   }
 }
-
-const mapStateToProps = (state) => {
-  return {...state}
-}
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     onTodoClick: (id) => {
-//       dispatch(toggleTodo(id))
-//     }
-//   }
-// }
-
-const ConnectedDummyTextComponent = connect(
-  mapStateToProps
-  // mapDispatchToProps
-)(DummyTextComponent)
 
 DummyTextComponent.displayName = 'DummyTextComponent';
 
@@ -115,4 +53,4 @@ DummyTextComponent.displayName = 'DummyTextComponent';
 // DummyTextComponent.propTypes = {};
 // DummyTextComponent.defaultProps = {};
 
-export default ConnectedDummyTextComponent;
+export default DummyTextComponent;

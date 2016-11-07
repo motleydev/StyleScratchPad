@@ -29,56 +29,49 @@ let manFonts = ['Arnhem-Black',
 
 //     originalFontFamiles: {},
 // }
-
-let appState = {
-    fontFamilies: {
-        headers: 'Mark W01 Bold',
-        body: 'Arnhem-Blond'
-    },
-    allFonts: [...markProProcess, ...manFonts],
-    typeElements: [
+let baseFontElements = [
         {
             name: 'h1',
             size: 5.75,
             lineHeight: 1.25,
             kearning: 0,
             marginAfter: 0,
-            class: 'header'
+            class: 'headers'
         }, {
             name: 'h2',
             size: 4.75,
             lineHeight: 1.25,
             kearning: 0,
             marginAfter: 0,
-            class: 'header'
+            class: 'headers'
         }, {
             name: 'h3',
             size: 3.75,
             lineHeight: 1.25,
             kearning: 0,
             marginAfter: 0,
-            class: 'header'
+            class: 'headers'
         }, {
             name: 'h4',
             size: 2.5,
             lineHeight: 1.25,
             kearning: 0,
             marginAfter: 0,
-            class: 'header'
+            class: 'headers'
         }, {
             name: 'h5',
             size: 1.75,
             lineHeight: 1.25,
             kearning: 0,
             marginAfter: 0,
-            class: 'header'
+            class: 'headers'
         }, {
             name: 'h6',
             size: 1.75,
             lineHeight: 1.25,
             kearning: 0,
             marginAfter: 0,
-            class: 'header'
+            class: 'headers'
         }, {
             name: 'p',
             size: 1.25,
@@ -116,6 +109,19 @@ let appState = {
             class: 'body'
         }
     ]
+
+let appState = {
+    fontFamilies: {
+        headers: 'Mark W01 Bold',
+        body: 'Arnhem-Blond'
+    },
+    currentDevice: 'small',
+    allFonts: [...markProProcess, ...manFonts],
+    responsiveType: {
+        small: [...baseFontElements],
+        medium: [...baseFontElements],
+        large: [...baseFontElements]
+    }
 }
 
 let store = createStore(styleApp, appState)

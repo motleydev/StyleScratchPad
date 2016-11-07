@@ -1,3 +1,17 @@
 .fontcontrolbox-component {
+	
 
+}
+
+.fontcontrolbox-component.mdl-card {
+	min-height: 0;
+	margin-bottom: 2em;
+}
+
+.element-title {
+	width: 100%;
+}
+
+.element-title > strong {
+	width: 100%;
 }

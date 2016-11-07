@@ -54,10 +54,9 @@ class HeaderComponent extends React.Component {
       </nav>
     </div>
   <main className="mdl-layout__content">
-    <div className="page-content">
-
+    
         {this.props.children}
-     </div>
+     
   </main>
 	</div>
     );

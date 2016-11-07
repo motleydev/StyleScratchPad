@@ -7,8 +7,6 @@ const getFontFamilies = (state = {}, action) => {
       		state,
       		action.payload.fontFamilies)
 
-      	console.table(newFontFamilies)
-      
       return newFontFamilies
 
     default:

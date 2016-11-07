@@ -23,19 +23,23 @@ class FlexDownComponent extends React.Component {
         this.state = {
             allFonts: this.props.fonts,
             initial: this.props.initial,
-            label: this.props.label
+            label: this.props.label,
+            open: false
         }
 
         this.filterFontFamily = this.filterFontFamily.bind(this)
         this.setDefaultFont = this.setDefaultFont.bind(this)
+        this._openClose = this._openClose.bind(this);
 
     }
 
     filterFontFamily(e) {
         e.preventDefault();
 
+
         let newState = {
-            fontFamilies: {}
+            fontFamilies: {},
+            open: true
         }
         let newList = []
 
@@ -57,10 +61,13 @@ class FlexDownComponent extends React.Component {
         }
 
         let newFontFamilies = {
-            fontFamilies: {}
+            fontFamilies: {},
+            open: false
         }
 
         newFontFamilies.fontFamilies[this.props.label] = e.target.value
+
+        newState.open = false;
 
         if (e.target.value === '') {
             newState.initial = this.props.fonts[0]
@@ -75,7 +82,8 @@ class FlexDownComponent extends React.Component {
     chooseFont(index, e) {
 
         let newFontFamilies = {
-            fontFamilies: {}
+            fontFamilies: {},
+            open: false
         }
 
         newFontFamilies.fontFamilies[this.props.label] =
@@ -85,21 +93,63 @@ class FlexDownComponent extends React.Component {
 
     }
 
+    _openClose() {
+        this.setState({
+            open: !this.state.open
+        })
+    }
+
     render() {
 
+        const style = {
+            height: this.state.open ? 'auto' : 0,
+            overflow: 'hidden',
+            padding: 0
+        }
+
+        const iconStyle = {
+            float: 'right'
+        }
+
         return (
-            <div className="flexDown">
+            <div className='flexDown mdl-card mdl-shadow--2dp'>
+
+            <div className='mdl-card__title'>
+        
+          <div className='mdl-card__title-text'>
+          <strong>
+          {this.props.label}
+          </strong>
+          </div>
+
+        </div>
+
+            <div className='mdl-card__supporting-text'>
+            <div style={style}>
+                {this.state.allFonts.map((font, index) => {
+                return <div onClick={(e) => this.chooseFont(index, e)} key={index}>{font}</div>
+                })}
+            </div>
+            </div>
+            <div className='mdl-card__actions mdl-card--border'>
  				<div className='mdl-textfield mdl-js-textfield'>
  					<input className='mdl-textfield__input' type='text' id={this.props.label}
             			value={this.state.initial}
             			onChange={this.filterFontFamily}
             			onBlur={this.setDefaultFont}
             		/>
- 					<label className='mdl-textfield__label' htmlFor={this.props.label}>Header Font</label>
+ 					<label className='mdl-textfield__label' htmlFor={this.props.label}>{this.props.label} Font</label>
  				</div>
- 			{this.state.allFonts.map((font, index) => {
-                return <div onClick={(e) => this.chooseFont(index, e)} key={index}>{font}</div>
-            })}
+            </div>
+
+            <div className="mdl-card__menu">
+                <button className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"  onClick={this._openClose} >
+                    {this.state.open
+                        ? <i className='material-icons' style={iconStyle}>keyboard_arrow_down</i>
+                    : <i className='material-icons' style={iconStyle}>keyboard_arrow_left</i>}
+                </button>
+            </div>
+
   			</div>
   		)
     }

@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import Style from './StyleComponent'
 
 var styleguideBoilerplate = require('html!../sources/styleguide.html');
 
@@ -21,8 +22,9 @@ class HtmlViewerComponent extends React.Component {
 
   render() {
     return (
-      <div className='mdl-cell mdl-cell--8-col' dangerouslySetInnerHTML={{__html: this.props.html}}>
-
+      <div className='mdl-cell mdl-cell--8-col'>
+      <Style />
+      <div className='contentContainer' dangerouslySetInnerHTML={{__html: this.props.html}} />
 
       </div>
     );
