@@ -17,9 +17,9 @@ class TypeControllerComponent extends React.Component {
     this.updateSelection = this.updateSelection.bind(this);
 	}
 
-  componentDidUpdate(){
-    m.upgradeDom();
-  }
+  // componentDidUpdate(){
+  //   m.upgradeDom();
+  // }
 
   updateStyle(index, props) {
     this.props.dispatch(updateTypeSettings(index, props, this.props.currentDevice))
@@ -53,17 +53,17 @@ class TypeControllerComponent extends React.Component {
             ? 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored'
             : 'mdl-button mdl-js-button mdl-button--icon'
             return (
-              
+
               <button className={style} key={index} onClick={
                 (e) => {this.props.dispatch(updateCurrentDevice(icon.text, e))}}>
-              
+
                 <i className='material-icons'>{icon.icon}</i>
-              
+
               </button>
-              
+
               )
           })}
-          
+
           </div>
           <FlexDown
             fonts={this.props.allFonts}
@@ -102,7 +102,7 @@ TypeControllerComponent.displayName = 'TypeControllerComponent';
 // Uncomment properties you need
 // TypeControllerComponent.propTypes = {};
 // TypeControllerComponent.defaultProps = {};
-// 
+//
 
 const mapStateToProps = (state) => {
   return {...state}

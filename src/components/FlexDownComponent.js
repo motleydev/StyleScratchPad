@@ -115,7 +115,7 @@ class FlexDownComponent extends React.Component {
             <div className='flexDown mdl-card mdl-shadow--2dp'>
 
             <div className='mdl-card__title'>
-        
+
           <div className='mdl-card__title-text'>
           <strong>
           {this.props.label}
@@ -127,7 +127,7 @@ class FlexDownComponent extends React.Component {
             <div className='mdl-card__supporting-text'>
             <div style={style}>
                 {this.state.allFonts.map((font, index) => {
-                return <div onClick={(e) => this.chooseFont(index, e)} key={index}>{font}</div>
+                return <div className='listItem' onClick={(e) => this.chooseFont(index, e)} key={index}>{font}</div>
                 })}
             </div>
             </div>

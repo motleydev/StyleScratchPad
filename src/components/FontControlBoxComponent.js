@@ -44,8 +44,8 @@ class FontControlBoxComponent extends React.Component {
     }
 
     componentDidUpdate(){
-    m.upgradeDom();
-  }
+      m.upgradeDom();
+    }
 
     render() {
 
@@ -65,7 +65,7 @@ class FontControlBoxComponent extends React.Component {
             <div className='fontcontrolbox-component mdl-card mdl-shadow--2dp'>
 
         <div className='mdl-card__title'>
-        
+
           <div className='mdl-card__title-text element-title'>
           <strong style={{
                     fontSize: `${this.props.size}rem`,
@@ -83,13 +83,13 @@ class FontControlBoxComponent extends React.Component {
           <div className='demo-list-action mdl-list' style={style}>
 
             <div className='mdl-list__item'>
-            
+
               <span className='mdl-list__item-primary-content'>
-              
+
               <i className='material-icons'>format_size</i>
-              
+
               <span>
-                
+
                 <input
                   className='mdl-slider mdl-js-slider'
                   type='range'
@@ -100,12 +100,12 @@ class FontControlBoxComponent extends React.Component {
                   max='10'
                   step='0.1'
                 />
-              
+
               </span>
-              
+
               <span className='mdl-list__item-secondary-action'
                 style={{width: '100px'}}>
-              
+
                 <input
                   className='mdl-textfield__input'
                   type='number'
@@ -116,14 +116,14 @@ class FontControlBoxComponent extends React.Component {
                   step='0.1'
                   onChange={this._handleChange}
                 />
-              
+
               </span>
             </span>
-  
+
           </div>
-        
+
         <div className='mdl-list__item'>
-            
+
             <span className='mdl-list__item-primary-content'>
             <i className='material-icons'>format_line_spacing</i>
               <span>
@@ -153,11 +153,11 @@ class FontControlBoxComponent extends React.Component {
             />
               </span>
             </span>
-  
+
           </div>
-        
+
         <div className='mdl-list__item'>
-            
+
             <span className='mdl-list__item-primary-content'>
             <i className='material-icons'>swap_horiz</i>
               <span>
@@ -187,11 +187,11 @@ class FontControlBoxComponent extends React.Component {
             />
               </span>
             </span>
-  
+
           </div>
-        
+
         <div className='mdl-list__item'>
-            
+
             <span className='mdl-list__item-primary-content'>
             <i className='material-icons'>vertical_align_bottom</i>
               <span>
@@ -221,7 +221,7 @@ class FontControlBoxComponent extends React.Component {
             />
               </span>
             </span>
-  
+
           </div>
 
           </div>
@@ -232,7 +232,7 @@ class FontControlBoxComponent extends React.Component {
               <span>{this.props.size} rem / {this.props.lineHeight} em</span>
             </a>
           </div>
-      
+
         <div className="mdl-card__menu">
           <button className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"  onClick={this._openClose} >
             {open
