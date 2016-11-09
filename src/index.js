@@ -11,14 +11,19 @@ let markProProcess = markPro.fonts.font.map((font) => {
     return font.$.CssFamilyName
 })
 
-let manFonts = ['Arnhem-Black',
-    'Arnhem-BlackItalic',
-    'Arnhem-Blond',
-    'Arnhem-BlondItalic',
-    'Arnhem-Bold',
-    'Arnhem-BoldItalic',
-    'Arnhem-Normal',
-    'Arnhem-NormalItalic',
+let manFonts = [
+    'Mark W01 Narrow',
+    'Mark W01 Narrow Italic',
+    'Mark W01 Narrow Bold',
+    'Mark W01 Narrow Bold Italic',
+    'Arnhem Black',
+    'Arnhem BlackItalic',
+    'Arnhem Blond',
+    'Arnhem BlondItalic',
+    'Arnhem Bold',
+    'Arnhem BoldItalic',
+    'Arnhem Normal',
+    'Arnhem NormalItalic',
     'Georgia',
     'Arial']
 
@@ -115,7 +120,7 @@ let appState = {
         headers: 'Mark W01 Bold',
         body: 'Arnhem-Blond'
     },
-    currentDevice: 'small',
+    currentDevice: 'large',
     allFonts: [...markProProcess, ...manFonts],
     responsiveType: {
         small: [...baseFontElements],
