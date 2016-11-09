@@ -32,7 +32,6 @@ class ColorPageComponent extends React.Component {
     this.updateBackgroundValue = this.updateBackgroundValue.bind(this)
     this.updateForegroundValue = this.updateForegroundValue.bind(this)
     this.removeForegroundValue = this.removeForegroundValue.bind(this)
-    this.setUrl = this.setUrl.bind(this)
     this.copytext = this.copytext.bind(this)
     this.updateHistory = this.updateHistory.bind(this)
     this.goBack = this.goBack.bind(this)
@@ -77,11 +76,7 @@ class ColorPageComponent extends React.Component {
 				{
 					rgb: [45,170,215]
 				}
-			],
-      url: {
-        foreground: '{}',
-        background: '{}'
-      }
+			]
 		}
 	}
 
@@ -90,29 +85,21 @@ class ColorPageComponent extends React.Component {
 
   	let newArr = [...this.state.foreground]
   	newArr.push({rgb: val})
-    let newUrl = {...this.state.url, foreground: encode(newArr)}
-    this.updateHistory()
+
   	this.setState({
-  		foreground: newArr,
-      url: newUrl
-  	}, ()=> {
-      this.updateHistory()
-    })
+  		foreground: newArr
+  	})
 
 	m.upgradeDom()
+  
   }
 
   removeForegroundValue(index) {
 
     let newArr = [...this.state.foreground]
     newArr.splice(index, 1)
-    let newUrl = {...this.state.url, foreground: encode(newArr)}
-    this.updateHistory()
     this.setState({
-      foreground: newArr,
-      url: newUrl
-    }, ()=> {
-      this.updateHistory()
+      foreground: newArr
     })
 
     m.upgradeDom()
@@ -123,14 +110,10 @@ class ColorPageComponent extends React.Component {
 
   	let newArr = [...this.state.background]
   	newArr.push({rgb: val})
-    let newUrl = {...this.state.url, background: encode(newArr)}
-    this.updateHistory()
+
   	this.setState({
-  		background: newArr,
-      url: newUrl
-  	}, ()=> {
-      this.updateHistory()
-    })
+  		background: newArr
+  	})
 
   }
 
@@ -139,12 +122,9 @@ class ColorPageComponent extends React.Component {
     let newArr = [...this.state.background]
     newArr[index] = {rgb: val};
     let newUrl = {...this.state.url, background: encode(newArr)}
-    this.updateHistory()
+
     this.setState({
       background: newArr,
-      url: newUrl
-    }, ()=> {
-      this.updateHistory()
     })
 
   }
@@ -153,26 +133,11 @@ class ColorPageComponent extends React.Component {
 
     let newArr = [...this.state.foreground]
     newArr[index] = {rgb: val}
-    let newUrl = {...this.state.url, foreground: encode(newArr)}
 
-    
-    
     this.setState({
       foreground: newArr,
-      url: newUrl
-    }, ()=> {
-      this.updateHistory()
     })
 
-  }
-
-  setUrl(){
-    this.setState({
-      url: {
-        foreground: encode(this.state.foreground),
-        background: encode(this.state.background)
-      }
-    })
   }
 
   copytext(e) {
@@ -206,27 +171,11 @@ class ColorPageComponent extends React.Component {
   }
 
   componentDidMount() {
-
-    let {routeParams} = this.props;
-    
-    if (routeParams.foreground) {
-      
-      let {foreground, background} = routeParams;
-
-      this.setState({
-        foreground: decode(foreground),
-        background: decode(background)
-      })
-      
-    }
-    this.setUrl()
   	m.upgradeDom()
   }
 
   componentDidUpdate(){
-
     m.upgradeDom()
-
   }
 
   

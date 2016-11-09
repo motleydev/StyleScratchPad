@@ -1,8 +1,9 @@
-const getTypeSettings = (state = {}, action) => {
+
+const getColors = (state = {}, action) => {
   switch (action.type) {
-    case 'UPDATE_TYPE_SETTINGS':
+    case 'UPDATE_COLOR_SETTINGS':
       let newArr = {...state}
-      newArr[action.device][action.index] = action.payload
+      newArr[action.postion][action.index] = action.payload
       return newArr
 
   default:

@@ -20,3 +20,12 @@ export const updateCurrentDevice = (payload) => {
 		payload: payload
 	}
 }
+
+export const updateColorSettings = (index, position, payload) => {
+	return {
+		type: 'GET_CURRENT_DEVICE',
+		index: index,
+		postion: position,
+		payload: payload
+	}
+}
