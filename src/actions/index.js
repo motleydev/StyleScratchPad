@@ -45,3 +45,11 @@ export const removeColorSettings = (index, position) => {
     position: position
   }
 }
+
+export const addState = (index, payload) => {
+  return {
+    type: 'ADD_STATE',
+    index,
+    payload
+  }
+}

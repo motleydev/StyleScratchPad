@@ -127,7 +127,13 @@ class FlexDownComponent extends React.Component {
             <div className='mdl-card__supporting-text'>
             <div style={style}>
                 {this.state.allFonts.map((font, index) => {
-                return <div className='listItem' onClick={(e) => this.chooseFont(index, e)} key={index}>{font}</div>
+                return (
+                    <div
+                        className='listItem'
+                        onClick={(e) => this.chooseFont(index, e)}
+                        key={index}
+                        style={{fontFamily: font}}
+                    >{font}</div>)
                 })}
             </div>
             </div>
@@ -137,6 +143,7 @@ class FlexDownComponent extends React.Component {
             			value={this.state.initial}
             			onChange={this.filterFontFamily}
             			onBlur={this.setDefaultFont}
+                        style={{fontFamily: this.props.initial}}
             		/>
  					<label className='mdl-textfield__label' htmlFor={this.props.label}>{this.props.label} Font</label>
  				</div>

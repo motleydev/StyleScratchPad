@@ -82,6 +82,7 @@
     "react-toolbox": "^1.2.1",
     "redux": "^3.6.0",
     "sass-loader": "^4.0.2",
+    "uuid": "^2.0.3",
     "xml-loader": "^1.1.0"
   }
 }

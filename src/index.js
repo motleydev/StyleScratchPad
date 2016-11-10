@@ -170,7 +170,9 @@ let appState = {
         medium: [...baseFontElements],
         large: [...baseFontElements]
     },
-    colors: color
+    colors: color,
+    allStates: [],
+    activeState: 0
 }
 
 let store = createStore(styleApp, appState)
