@@ -115,6 +115,49 @@ let baseFontElements = [
         }
     ]
 
+let color = {
+  foreground: [
+        {
+          rgb: [45,170,215]
+        },
+        {
+          rgb: [230,0,85]
+        },
+        {
+          rgb: [163,210,11]
+        },
+        {
+          rgb: [242,126,0]
+        },
+        {
+          rgb: [122,32,172]
+        },
+        {
+          rgb: [246, 177, 184]
+        },
+        {
+          rgb: [216, 230, 177]
+        },
+        {
+          rgb: [252, 206, 161]
+        },
+        {
+          rgb: [192, 170, 210]
+        }
+      ],
+      background: [
+        {
+          rgb: [0,0,0]
+        },
+        {
+          rgb: [255,255,255]
+        },
+        {
+          rgb: [45,170,215]
+        }
+      ]
+}
+
 let appState = {
     fontFamilies: {
         headers: 'Mark W01 Bold',
@@ -126,7 +169,8 @@ let appState = {
         small: [...baseFontElements],
         medium: [...baseFontElements],
         large: [...baseFontElements]
-    }
+    },
+    colors: color
 }
 
 let store = createStore(styleApp, appState)

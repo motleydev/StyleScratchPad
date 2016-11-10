@@ -63,6 +63,7 @@ class InlineEditComponent extends React.Component {
     let {editMode} = this.state;
     let color = Color().rgb(this.props.text)
 
+
     let backgroundColor, rgb, hex
 
     if (this.props.text) {

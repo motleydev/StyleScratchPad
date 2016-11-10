@@ -17,11 +17,10 @@ class AppComponent extends React.Component {
     return (
    	<Router history={browserHistory}>
     	<Route path="/" component={HomePageComponent}>
-    		<IndexRoute component={TypoPageComponent}/>
-      		<Route path="typography" component={TypoPageComponent}/>
-          <Route path="dummy-text" component={DummyTextComponent}/>
-          <Route path="color(/:foreground/:background)" component={ColorPageComponent}/>
-      		<Route path="color" component={ColorPageComponent}/>
+    		<IndexRoute component={TypoPageComponent} />
+      		<Route path="typography" component={TypoPageComponent} />
+          <Route path="dummy-text" component={DummyTextComponent} />
+      		<Route path="color" component={ColorPageComponent} />
     	</Route>
   	</Router>
     );

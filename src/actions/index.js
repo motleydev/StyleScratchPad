@@ -23,9 +23,25 @@ export const updateCurrentDevice = (payload) => {
 
 export const updateColorSettings = (index, position, payload) => {
 	return {
-		type: 'GET_CURRENT_DEVICE',
+		type: 'UPDATE_COLOR_SETTINGS',
 		index: index,
-		postion: position,
+		position: position,
 		payload: payload
 	}
+}
+
+export const addColorSettings = (position, payload) => {
+  return {
+    type: 'ADD_COLOR_SETTINGS',
+    position: position,
+    payload: payload
+  }
+}
+
+export const removeColorSettings = (index, position) => {
+  return {
+    type: 'REMOVE_COLOR_SETTINGS',
+    index: index,
+    position: position
+  }
 }
