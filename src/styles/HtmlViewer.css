@@ -6,4 +6,16 @@
 	white-space: pre-wrap;
 }
 
+*[contenteditable]:hover {
+	backgrund: rgba(0,0,0,0.05)
+}
 
+*[contenteditable]:focus {
+	outline:none;
+	background: rgba(0,0,0,0.05);
+	border-bottom: 1px solid gray;
+}
+
+a {
+	color: inherit !important;
+}

@@ -2,8 +2,9 @@
 
 import React from 'react';
 import {connect} from 'react-redux'
-import {addState} from '../actions'
+import {addState, } from '../actions'
 import { Link } from 'react-router'
+import StyleList from './StyleListComponent'
 // import TypeController from './TypeControllerComponent'
 
 import uuid from 'uuid'
@@ -17,23 +18,41 @@ class HeaderComponent extends React.Component {
 	constructor(props) {
 		super(props);
     this.saveState = this.saveState.bind(this)
+    this.saveNew = this.saveNew.bind(this)
 	}
 
   saveState() {
-
+    console.log(name)
     const allStates = [...this.props.allStates]
 
-    const { fontFamilies, responsiveType, colors } = this.props
-    const persistedState = Object.assign({name, sessionId}, {fontFamilies}, {responsiveType}, {colors})
-    allStates[this.props.activeState] = persistedState
+    const { fontFamilies, responsiveType, colors, activeState } = this.props
+    const persistedState = Object.assign(
+      {name: `Style ${activeState}`, sessionId},
+      {fontFamilies},
+      {responsiveType},
+      {colors},
+      {activeState}
+      )
+    // allStates[this.props.activeState] = persistedState
 
     this.props.dispatch(addState(this.props.activeState, persistedState))
-    try {
-      const serializedState = JSON.stringify(this.props.allStates)
-        localStorage.setItem('state', serializedState)
-      } catch (err) {
-    // mute
+    // try {
+    //   const serializedState = JSON.stringify(this.props.allStates)
+    //     localStorage.setItem('state', serializedState)
+    //   } catch (err) {
+    // // mute
+    // }
+  }
+
+  saveNew() {
+
+    function changeActiveAddNew() {
+      return dispatch => {
+        dispatch()
+        dispatch()
+      }
     }
+
   }
 
   render() {
@@ -46,7 +65,13 @@ class HeaderComponent extends React.Component {
 
     <div className="mdl-layout__header-row">
 
-      <span className="mdl-layout-title">Smart Styler</span><span onClick={this.saveState}>save</span>
+      <span className="mdl-layout-title">Smart Styler</span>
+      <span onClick={this.saveState}>
+        Save Changes
+      </span>
+      <span onClick={this.saveNew}>
+        Save New
+      </span>
       <div className="mdl-layout-spacer"></div>
       <div className="mdl-textfield mdl-js-textfield mdl-textfield--expandable
                   mdl-textfield--floating-label mdl-textfield--align-right">
@@ -76,13 +101,7 @@ class HeaderComponent extends React.Component {
   <div className="mdl-layout__drawer">
       <span className="mdl-layout-title">Typo</span>
       <nav className="mdl-navigation">
-      {allStates && allStates.map((state, index) => {
-        return (
-          <div key={index}>
-            <p>{state.sessionId}</p>
-          </div>
-          )
-      })}
+      {allStates && <StyleList styles={allStates} />}
       </nav>
     </div>
   <main className="mdl-layout__content">
