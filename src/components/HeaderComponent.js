@@ -2,13 +2,25 @@
 
 import React from 'react';
 import {connect} from 'react-redux'
-import {addState, } from '../actions'
+import {
+  addState,
+  updateState,
+  updateStateName,
+  removeState,
+  updateCurrentState,
+  replaceTypeSettings,
+  replaceColorSettings,
+  hydrateState,
+  replaceFontFamilies } from '../actions'
 import { Link } from 'react-router'
 import StyleList from './StyleListComponent'
+import { loadState } from '../../lib/loadState'
+
+import moment from 'moment'
 // import TypeController from './TypeControllerComponent'
 
 import uuid from 'uuid'
-const name = new Date()
+const date = moment().format('DD/MM/YY h:mm a')
 const sessionId = uuid.v4()
 
 require('styles//Header.css');
@@ -19,15 +31,47 @@ class HeaderComponent extends React.Component {
 		super(props);
     this.saveState = this.saveState.bind(this)
     this.saveNew = this.saveNew.bind(this)
+    this.updateState = this.updateState.bind(this)
+    this.removeState = this.removeState.bind(this)
+    this.updateName = this.updateName.bind(this)
 	}
 
-  saveState() {
-    console.log(name)
+  componentDidMount() {
+    const hydratedState = loadState()
+    if (hydratedState) {
+      this.props.dispatch(hydrateState(hydratedState))
+    }
+  }
+
+  updateState(index, styles) {
+
+     const replaceState = () => {
+      return dispatch => {
+        dispatch(replaceTypeSettings(styles.responsiveType))
+        dispatch(replaceColorSettings(styles.colors))
+        dispatch(replaceFontFamilies(styles.fontFamilies))
+        dispatch(updateCurrentState(index))
+      }
+    }
+
+    replaceState()(this.props.dispatch)
+  }
+
+  updateName(e) {
+    this.props.dispatch(updateStateName(this.props.activeState, e.target.value))
+  }
+
+  removeState(index) {
+    this.props.dispatch(removeState(index))
+  }
+
+  saveState(e) {
+    e.preventDefault()
     const allStates = [...this.props.allStates]
 
     const { fontFamilies, responsiveType, colors, activeState } = this.props
     const persistedState = Object.assign(
-      {name: `Style ${activeState}`, sessionId},
+      {name: `Style ${activeState}`, sessionId, date},
       {fontFamilies},
       {responsiveType},
       {colors},
@@ -35,28 +79,33 @@ class HeaderComponent extends React.Component {
       )
     // allStates[this.props.activeState] = persistedState
 
-    this.props.dispatch(addState(this.props.activeState, persistedState))
-    // try {
-    //   const serializedState = JSON.stringify(this.props.allStates)
-    //     localStorage.setItem('state', serializedState)
-    //   } catch (err) {
-    // // mute
-    // }
+    this.props.dispatch(updateState(this.props.activeState, persistedState))
   }
 
-  saveNew() {
+  saveNew(e) {
+    e.preventDefault()
 
-    function changeActiveAddNew() {
+    const { fontFamilies, responsiveType, colors, activeState } = this.props
+    const persistedState = Object.assign(
+      {name: `Style ${activeState}`, sessionId, date},
+      {fontFamilies},
+      {responsiveType},
+      {colors},
+      {activeState}
+      )
+
+    const changeActiveAddNew = () => {
       return dispatch => {
-        dispatch()
-        dispatch()
+        dispatch(updateCurrentState(this.props.activeState + 1))
+        dispatch(addState(persistedState))
       }
     }
+
+    changeActiveAddNew()(this.props.dispatch)
 
   }
 
   render() {
-
     const {allStates} = this.props
 
     return (
@@ -66,21 +115,16 @@ class HeaderComponent extends React.Component {
     <div className="mdl-layout__header-row">
 
       <span className="mdl-layout-title">Smart Styler</span>
-      <span onClick={this.saveState}>
+      {this.props.allStates.length > 0 && <a href="/" onClick={this.saveState}>
         Save Changes
-      </span>
-      <span onClick={this.saveNew}>
+      </a>}
+      <a href="/" onClick={this.saveNew}>
         Save New
-      </span>
+      </a>
       <div className="mdl-layout-spacer"></div>
       <div className="mdl-textfield mdl-js-textfield mdl-textfield--expandable
                   mdl-textfield--floating-label mdl-textfield--align-right">
-       
-       {1+1===3 && <label className="mdl-button mdl-js-button mdl-button--icon"
-                      htmlFor="waterfall-exp">
-                 <i className="material-icons">search</i>
-               </label>}
-       
+
         <div className="mdl-textfield__expandable-holder">
           <input className="mdl-textfield__input" type="text" name="sample"
                  id="waterfall-exp" />
@@ -92,6 +136,14 @@ class HeaderComponent extends React.Component {
       <div className="mdl-layout-spacer"></div>
 
       <nav className="mdl-navigation">
+        {this.props.allStates.length > 0 && <div className="mdl-textfield mdl-js-textfield">
+          <input
+            className="mdl-textfield__input"
+            type="text"
+            onChange={this.updateName}
+            value={this.props.allStates[this.props.activeState].name} />
+          <label className="mdl-textfield__label" htmlFor="sample1">Text...</label>
+        </div>}
       	<Link className="mdl-navigation__link" to="/typography">Typography</Link>
         <Link className="mdl-navigation__link" to="/dummy-text">Dummy Text</Link>
         <Link className="mdl-navigation__link" to="/color">Color</Link>
@@ -99,15 +151,15 @@ class HeaderComponent extends React.Component {
     </div>
   </header>
   <div className="mdl-layout__drawer">
-      <span className="mdl-layout-title">Typo</span>
+      <span className="mdl-layout-title">Styles</span>
       <nav className="mdl-navigation">
-      {allStates && <StyleList styles={allStates} />}
-      </nav>
+      {allStates && <StyleList styles={allStates} updateState={this.updateState} removeState={this.removeState} />}
+    </nav>
     </div>
   <main className="mdl-layout__content">
-    
+
         {this.props.children}
-     
+
   </main>
 	</div>
     );

@@ -8,6 +8,7 @@
 
 const path = require('path');
 const srcPath = path.join(__dirname, '/../src');
+const libPath = path.join(__dirname, '/../lib');
 const dfltPort = 8000;
 
 /**
@@ -19,7 +20,7 @@ function getDefaultModules() {
     preLoaders: [
       {
         test: /\.(js|jsx)$/,
-        include: srcPath,
+        include: [srcPath, libPath],
         loader: 'eslint-loader'
       }
     ],
@@ -59,6 +60,7 @@ function getDefaultModules() {
 
 module.exports = {
   srcPath: srcPath,
+  libPath: libPath,
   publicPath: '/assets/',
   port: dfltPort,
   getDefaultModules: getDefaultModules

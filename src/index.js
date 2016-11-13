@@ -6,6 +6,8 @@ import ReactDOM from 'react-dom';
 import styleApp from './reducers'
 import App from './components/Main';
 
+import { saveState } from '../lib/loadState'
+
 const markPro = require('xml!./sources/fonts_src/fontlist.xml');
 let markProProcess = markPro.fonts.font.map((font) => {
     return font.$.CssFamilyName
@@ -176,6 +178,11 @@ let appState = {
 }
 
 let store = createStore(styleApp, appState)
+
+store.subscribe(() => {
+  saveState(store.getState().allStates)
+})
+
 
 // Render the main component into the dom
 ReactDOM.render(

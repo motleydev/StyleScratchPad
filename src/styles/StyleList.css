@@ -1,3 +1,46 @@
 .stylelist-component {
   border: 1px dashed #f00;
 }
+
+
+.demo-list-two .mdl-list__item {
+  height: auto;
+  flex-wrap: wrap;
+}
+
+.demo-list-two .mdl-list__item:hover {
+  background: rgba(0,0,0,0.05)
+}
+
+
+.demo-list-two .mdl-list__item div {
+  display: flex;
+  flex: 0 1 100%;
+}
+
+.demo-list-two .mdl-list__item div .secondary-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.secondary-content span {
+  display: flex;
+  align-items: center;
+}
+
+.mdl-list__item div {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.mdl-list__item div:nth-child(2) {
+  border-top: 1px solid rgba(0,0,0,0.05);
+  height: 0;
+  opacity:0;
+}
+
+.mdl-list__item:hover div:nth-child(2) {
+  height: auto;
+  opacity:1;
+}

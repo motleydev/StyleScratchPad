@@ -1,0 +1,9 @@
+.importpage-component {
+  border: 1px dashed #f00;
+}
+
+
+.button-box{
+  display:flex;
+  align-items: center;
+}

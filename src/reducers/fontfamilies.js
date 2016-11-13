@@ -6,9 +6,10 @@ const getFontFamilies = (state = {}, action) => {
       		{},
       		state,
       		action.payload.fontFamilies)
-
-      return newFontFamilies
-
+        return newFontFamilies
+    case 'REPLACE_FONT_FAMILY':
+      let newObj = action.payload
+      return newObj
     default:
       return state
   }

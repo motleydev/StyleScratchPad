@@ -11,18 +11,7 @@ import {updateColorSettings, addColorSettings, removeColorSettings} from '../act
 
 import { withRouter } from 'react-router'
 
-import copy from 'copy-to-clipboard';
-
 var m = require('exports?componentHandler!material-design-lite/material.js');
-
-function encode(val) {
-  return encodeURIComponent(JSON.stringify(val))
-}
-
-function decode(val) {
-  return JSON.parse(decodeURIComponent(val))
-}
-
 
 class ColorPageComponent extends React.Component {
 
@@ -34,14 +23,14 @@ class ColorPageComponent extends React.Component {
     this.updateBackgroundValue = this.updateBackgroundValue.bind(this)
     this.updateForegroundValue = this.updateForegroundValue.bind(this)
     this.removeForegroundValue = this.removeForegroundValue.bind(this)
-    this.copytext = this.copytext.bind(this)
-    this.updateHistory = this.updateHistory.bind(this)
-    this.goBack = this.goBack.bind(this)
+    // this.copytext = this.copytext.bind(this)
+    // this.updateHistory = this.updateHistory.bind(this)
+    // this.goBack = this.goBack.bind(this)
 	}
 
 
   addForegroundValue(val) {
-  this.props.dispatch(addColorSettings('foreground', val))
+    this.props.dispatch(addColorSettings('foreground', val))
   }
 
   addBackgroundValue(val) {
@@ -62,31 +51,31 @@ class ColorPageComponent extends React.Component {
 
   }
 
-  copytext(e) {
-    e.preventDefault()
+  // copytext(e) {
+  //   e.preventDefault()
 
-     copy(window.location.href);
-  }
+  //    copy(window.location.href);
+  // }
 
-  goBack(e) {
-    e.preventDefault()
+  // goBack(e) {
+  //   e.preventDefault()
 
-    this.props.router.goBack()
+  //   this.props.router.goBack()
 
-    let {routeParams} = this.props;
+  //   let {routeParams} = this.props;
 
-    if (routeParams.foreground) {
+  //   if (routeParams.foreground) {
 
-      let {foreground, background} = routeParams;
+  //     let {foreground, background} = routeParams;
 
-      this.setState({
-        foreground: decode(foreground),
-        background: decode(background)
-      })
+  //     this.setState({
+  //       foreground: decode(foreground),
+  //       background: decode(background)
+  //     })
 
-    }
+  //   }
 
-  }
+  // }
 
   updateHistory() {
     this.props.router.push(`/color/${this.state.url.foreground}/${this.state.url.background}`)
@@ -108,15 +97,6 @@ class ColorPageComponent extends React.Component {
     return (
 
       <div className='mdl-grid'>
-        <div className='mdl-cell mdl-cell--12-col'>
-        <button className="mdl-button mdl-js-button mdl-button--icon" onClick={this.goBack}>
-          <i className="material-icons">undo</i>
-        </button>
-        <button className="mdl-button mdl-js-button mdl-button--icon" onClick={this.copytext}>
-          <i className="material-icons">content_cut</i>
-        </button>
-
-        </div>
       	<div className='mdl-cell mdl-cell--12-col'>
       	<table className='mdl-data-table mdl-js-data-table mdl-shadow--2dp'>
   <thead>
@@ -181,3 +161,15 @@ const ConnectedColorPageComponent = connect(
 
 
 export default ConnectedColorPageComponent;
+
+
+
+// <div className='mdl-cell mdl-cell--12-col'>
+//         <button className="mdl-button mdl-js-button mdl-button--icon" onClick={this.goBack}>
+//           <i className="material-icons">undo</i>
+//         </button>
+//         <button className="mdl-button mdl-js-button mdl-button--icon" onClick={this.copytext}>
+//           <i className="material-icons">content_cut</i>
+//         </button>
+
+//         </div>

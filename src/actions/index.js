@@ -1,10 +1,17 @@
-export const updateTypeSettings = (index, props, device) => {
+export const updateTypeSettings = (index, payload, device) => {
 	return {
 		type: 'UPDATE_TYPE_SETTINGS',
-		index: index,
-		device: device,
-		payload: props
+		index,
+		device,
+		payload
 	}
+}
+
+export const replaceTypeSettings = (payload) => {
+  return {
+    type: 'REPLACE_TYPE_SETTINGS',
+    payload
+  }
 }
 
 export const updateFontFamilies = (payload) => {
@@ -14,42 +21,93 @@ export const updateFontFamilies = (payload) => {
 	}
 }
 
+export const replaceFontFamilies = (payload) => {
+  return {
+    type: 'REPLACE_FONT_FAMILY',
+    payload
+  }
+}
+
 export const updateCurrentDevice = (payload) => {
 	return {
 		type: 'GET_CURRENT_DEVICE',
-		payload: payload
+		payload
 	}
 }
 
 export const updateColorSettings = (index, position, payload) => {
 	return {
 		type: 'UPDATE_COLOR_SETTINGS',
-		index: index,
-		position: position,
-		payload: payload
+		index,
+		position,
+		payload
 	}
+}
+
+export const replaceColorSettings = (payload) => {
+  return {
+    type: 'REPLACE_COLOR_SETTINGS',
+    payload
+  }
 }
 
 export const addColorSettings = (position, payload) => {
   return {
     type: 'ADD_COLOR_SETTINGS',
-    position: position,
-    payload: payload
+    position,
+    payload
   }
 }
 
 export const removeColorSettings = (index, position) => {
   return {
     type: 'REMOVE_COLOR_SETTINGS',
-    index: index,
-    position: position
+    index,
+    position
   }
 }
 
-export const addState = (index, payload) => {
+export const addState = (payload) => {
   return {
     type: 'ADD_STATE',
+    payload
+  }
+}
+
+export const removeState = (index) => {
+  return {
+    type: 'REMOVE_STATE',
+    index
+  }
+}
+
+export const updateState = (index, payload) => {
+  return {
+    type: 'UPDATE_STATE',
     index,
     payload
+  }
+}
+
+export const updateStateName = (index, payload) => {
+  return {
+    type: 'UPDATE_STATE_NAME',
+    index,
+    payload
+  }
+}
+
+export const hydrateState = (payload) => {
+  return {
+    type: 'HYDRATE_STATE',
+    payload
+  }
+}
+
+
+export const updateCurrentState = (number) => {
+  return {
+    type: 'SET_ACTIVE_STATE',
+    number
   }
 }
