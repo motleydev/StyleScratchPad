@@ -96,8 +96,8 @@ class HeaderComponent extends React.Component {
 
     const changeActiveAddNew = () => {
       return dispatch => {
-        dispatch(updateCurrentState(this.props.activeState + 1))
         dispatch(addState(persistedState))
+        dispatch(updateCurrentState(this.props.activeState + 1))
       }
     }
 
@@ -106,7 +106,9 @@ class HeaderComponent extends React.Component {
   }
 
   render() {
-    const {allStates} = this.props
+
+    const {allStates, activeState} = this.props
+    let previous = allStates.length > 0 ? allStates.length -1 : 0
 
     return (
       <div className="demo-layout-waterfall mdl-layout mdl-js-layout">
@@ -136,12 +138,12 @@ class HeaderComponent extends React.Component {
       <div className="mdl-layout-spacer"></div>
 
       <nav className="mdl-navigation">
-        {this.props.allStates.length > 0 && <div className="mdl-textfield mdl-js-textfield">
+        {allStates[previous] && <div className="mdl-textfield mdl-js-textfield">
           <input
             className="mdl-textfield__input"
             type="text"
             onChange={this.updateName}
-            value={this.props.allStates[this.props.activeState].name} />
+            value={allStates[previous].name} />
           <label className="mdl-textfield__label" htmlFor="sample1">Text...</label>
         </div>}
       	<Link className="mdl-navigation__link" to="/typography">Typography</Link>
