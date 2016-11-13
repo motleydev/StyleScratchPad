@@ -37,10 +37,15 @@ class HeaderComponent extends React.Component {
 	}
 
   componentDidMount() {
+    const { allStates, activeState } = this.props
     const hydratedState = loadState()
+
     if (hydratedState) {
       this.props.dispatch(hydrateState(hydratedState))
     }
+
+    const active = allStates.length > 0 ? allStates.length - 1 : 0
+    this.props.dispatch(updateCurrentState(active))
   }
 
   updateState(index, styles) {
@@ -95,9 +100,10 @@ class HeaderComponent extends React.Component {
       )
 
     const changeActiveAddNew = () => {
+
+      const { allStates, activeState } = this.props
       return dispatch => {
         dispatch(addState(persistedState))
-        dispatch(updateCurrentState(this.props.activeState + 1))
       }
     }
 
@@ -108,7 +114,6 @@ class HeaderComponent extends React.Component {
   render() {
 
     const {allStates, activeState} = this.props
-    let previous = allStates.length > 0 ? allStates.length -1 : 0
 
     return (
       <div className="demo-layout-waterfall mdl-layout mdl-js-layout">
@@ -138,12 +143,12 @@ class HeaderComponent extends React.Component {
       <div className="mdl-layout-spacer"></div>
 
       <nav className="mdl-navigation">
-        {allStates[previous] && <div className="mdl-textfield mdl-js-textfield">
+        {allStates[activeState] && <div className="mdl-textfield mdl-js-textfield">
           <input
             className="mdl-textfield__input"
             type="text"
             onChange={this.updateName}
-            value={allStates[previous].name} />
+            value={allStates[activeState].name} />
           <label className="mdl-textfield__label" htmlFor="sample1">Text...</label>
         </div>}
       	<Link className="mdl-navigation__link" to="/typography">Typography</Link>
