@@ -8,26 +8,69 @@ import App from './components/Main';
 
 import { saveState } from '../lib/loadState'
 
-const markPro = require('xml!./sources/fonts_src/fontlist.xml');
-let markProProcess = markPro.fonts.font.map((font) => {
-    return font.$.CssFamilyName
-})
-
 let manFonts = [
-    'Mark W01 Narrow',
-    'Mark W01 Narrow Italic',
-    'Mark W01 Narrow Bold',
-    'Mark W01 Narrow Bold Italic',
-    'Arnhem Black',
-    'Arnhem BlackItalic',
-    'Arnhem Blond',
-    'Arnhem BlondItalic',
-    'Arnhem Bold',
-    'Arnhem BoldItalic',
-    'Arnhem Normal',
-    'Arnhem NormalItalic',
     'Georgia',
-    'Arial']
+    'Arial',
+    'Lato-Black',
+'Lato-BlackItalic',
+'Lato-Bold',
+'Lato-BoldItalic',
+'Lato-Hairline',
+'Lato-HairlineItalic',
+'Lato-Italic',
+'Lato-Light',
+'Lato-LightItalic',
+'Lato-Regular',
+'Montserrat-Black',
+'Montserrat-Bold',
+'Montserrat-ExtraBold',
+'Montserrat-ExtraLight',
+'Montserrat-Light',
+'Montserrat-Medium',
+'Montserrat-Regular',
+'Montserrat-SemiBold',
+'Montserrat-Thin',
+'MontserratAlternates-Black',
+'MontserratAlternates-Bold',
+'MontserratAlternates-ExtraBold',
+'MontserratAlternates-ExtraLight',
+'MontserratAlternates-Light',
+'MontserratAlternates-Medium',
+'MontserratAlternates-Regular',
+'MontserratAlternates-SemiBold',
+'MontserratAlternates-Thin',
+'OpenSans-Bold',
+'OpenSans-BoldItalic',
+'OpenSans-ExtraBold',
+'OpenSans-ExtraBoldItalic',
+'OpenSans-Italic',
+'OpenSans-Light',
+'OpenSans-LightItalic',
+'OpenSans-Regular',
+'OpenSans-Semibold',
+'OpenSans-SemiboldItalic',
+'Oswald-Bold',
+'Oswald-Light',
+'Oswald-Regular',
+'PlayfairDisplay-Black',
+'PlayfairDisplay-BlackItalic',
+'PlayfairDisplay-Bold',
+'PlayfairDisplay-BoldItalic',
+'PlayfairDisplay-Italic',
+'PlayfairDisplay-Regular',
+'Roboto-Black',
+'Roboto-BlackItalic',
+'Roboto-Bold',
+'Roboto-BoldItalic',
+'Roboto-Italic',
+'Roboto-Light',
+'Roboto-LightItalic',
+'Roboto-Medium',
+'Roboto-MediumItalic',
+'Roboto-Regular',
+'Roboto-Thin',
+'Roboto-ThinItalic'
+]
 
 
 // let appstate = {
@@ -162,11 +205,11 @@ let color = {
 
 let appState = {
     fontFamilies: {
-        headers: 'Mark W01 Bold',
-        body: 'Arnhem-Blond'
+        headers: 'MontserratAlternates-Medium',
+        body: 'OpenSans-Regular'
     },
     currentDevice: 'large',
-    allFonts: [...markProProcess, ...manFonts],
+    allFonts: [...manFonts],
     responsiveType: {
         small: [...baseFontElements],
         medium: [...baseFontElements],

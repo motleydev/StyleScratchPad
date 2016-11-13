@@ -11,7 +11,7 @@ let npmBase = path.join(__dirname, '../node_modules');
 let requiredFiles = [
   path.join(npmBase, 'material-design-lite/material.min.js'),
   path.join(npmBase, 'material-design-lite/material.min.css'),
-  path.join(__dirname, '../src/sources/demo.css'),
+  path.join(__dirname, '../src/sources/fonts.css'),
 ]
 
 let additionalPaths = [];

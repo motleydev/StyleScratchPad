@@ -1,30 +1,122 @@
-<h1>Die neue Bank Coop (H1)</h1>
+<h1>iOS Human Interface Guidelines</h1>
+<h2 id="layout">Layout</h2>
 
-<p>1970 beschloss die Delegiertenversammlung der Genossenschafter die Umwandlung in eine Aktiengesellschaft. 1995 erfolgte die Umbenennung in <i>Coop Bank</i>. Am 20.&#160;Dezember 1999 übernahm die <a href="https://de.wikipedia.org/wiki/Basler_Kantonalbank" title="Basler Kantonalbank">Basler Kantonalbank</a> die Mehrheitsbeteiligung. 2001 wurde die Namensänderung zur <i>Bank Coop</i> vollzogen.</p>
-<p>Die Aktien der <i>Bank Coop</i> sind an der Schweizer Börse <a href="https://de.wikipedia.org/wiki/SIX_Swiss_Exchange" title="SIX Swiss Exchange">SIX Swiss Exchange</a> <a href="https://de.wikipedia.org/wiki/Kotierung" class="mw-redirect" title="Kotierung">kotiert</a>. Per Ende 2009 hielt die Basler Kantonalbank einen Anteil von 57,6&#160;% an der Bank Coop. Weitere 10,4&#160;% werden von der früheren Muttergesellschaft <i>Coop</i> gehalten. Des Weiteren halten die Gewerkschaftsverbände 5,1&#160;% der Anteile. 1,1&#160;% werden von der Bank im Handelsbestand und in Finanzanlagen gehalten. Der Rest ist im Streubesitz. 2017 erfolgte die ...</p>
+<p>People generally want the ability to use their favorite apps on all of their devices and in any orientation. In iOS, interface elements and layouts can be configured to automatically change shape and size on different devices, during multitasking on iPad, in split view, and when the screen is rotated. It’s essential that you plan ahead and design an app that provides a great experience in any context.</p>
+
+<p></p>
+
+<p><strong>Maintain focus on the current content during context changes.</strong> Content is your highest priority. Changing focus when the environment changes can be disorienting, frustrating, and make people feel like they’ve lost control of the app.</p>
+
+<p><strong>Ensure primary content is clear at its default size.</strong> People shouldn’t have to scroll horizontally to read important text, or zoom to see primary images, unless they choose to change the size.</p>
+
+<p><strong>Maintain an overall consistent appearance throughout your app.</strong> In general, elements with similar functions should look similar.</p>
+
+<p><strong>Use visual weight and balance to denote importance.</strong> Large items catch the eye and appear more important than smaller ones. Larger items are also easier to tap, which is especially important when an app is used in distracting surroundings, such as in the kitchen or a gym. In general, place principal items in the upper half of the screen and—in a left-to-right reading context—near the left side of the screen.</p>
+
+<p><strong>Use alignment to ease scanning and to communicate organization and hierarchy.</strong> Alignment makes an app look neat and organized, helps people focus while scrolling, and makes it easier to find information. Indentation and alignment can also indicate how groups of content are related.</p>
+
+<p><strong>Avoid gratuitous layout changes.</strong> Just because someone rotates a device doesn’t mean the entire layout needs to change. For example, if your app shows a grid of images in portrait mode, it doesn’t have to present the same images as a list in landscape mode. Instead, it might simply adjust the dimensions of the grid. Try to maintain a comparable experience in all contexts.</p>
+
+<p><strong>If possible, support both portrait and landscape orientations.</strong> People prefer to use apps in different orientations, so it’s best when you can fulfill that expectation.</p>
+
+<p><strong>If your app supports only one orientation, support both variants.</strong> If it’s essential that your app run in a single orientation, make sure it supports both orientation variants. For example, if your app only runs in landscape mode, it should be usable regardless of whether the Home button is on the left or the right. If the device is rotated 180 degrees while using your app, your app should respond by rotating its content 180 degrees. If your app doesn't rotate automatically when someone holds the device wrong, they'll know instinctively to rotate it. You don't need to tell them.</p>
+
+<p><strong>Customize your app’s response to rotation according to context.</strong> A game that lets people move a character by rotating the device, for example, probably shouldn’t switch orientations during gameplay. It could, however, display menus and intro sequences based on the current orientation.</p>
+
+<p><strong>Provide ample spacing for interactive elements.</strong> Try to maintain a minimum tappable area of 44pt x 44pt for all controls.</p>
+
+<p><strong>Be prepared for text size changes.</strong> People expect most apps to respond appropriately when they choose a different text size in Settings. To accommodate some text-size changes, you might need to adjust the layout. For more information about text usage in your app, see <a href="/ios/human-interface-guidelines/visual-design/typography/" onclick="s_objectID=&quot;https://developer.apple.com/ios/human-interface-guidelines/visual-design/typography/_3&quot;;return this.s_oc?this.s_oc(e):true">Typography</a>.</p>
+
+<p>For implementation details on adaptivity, see <a href="https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/AutolayoutPG/index.html" onclick="s_objectID=&quot;https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/AutolayoutPG/_1&quot;;return this.s_oc?this.s_oc(e):true">Auto Layout Guide</a>.</p>
+
+<h2 id="color">Color</h2>
+
+<p>In iOS, color can indicate interactivity, impart vitality, and provide visual continuity. Look to the system’s color scheme for guidance when picking app tint colors that look great individually and in combination, on both light and dark backgrounds.</p>
+
+<p><strong>Use complementary colors throughout your app.</strong> The colors in your app should work well together, not conflict or distract. If pastels are essential to your app’s style, for example, use a coordinating set of pastels.</p>
+
+<p><strong>Consider choosing a key color to indicate interactivity throughout your app.</strong> In Notes, interactive elements are yellow. In Calendar, interactive elements are red. If you define a key color that denotes interactivity, make sure other colors don’t compete with it.</p>
+
+<p><strong>In general, choose a limited color palette that coordinates with your app logo.</strong> Subtle use of color is a great way to communicate your brand.</p>
+
+<p><strong>Apply color profiles to your images.</strong> The default color space on iOS is Standard RGB (sRGB). To ensure that colors are correctly matched to this color space, make sure your images include embedded color profiles.</p>
+
+<p><strong>Use wide color to enhance the visual experience on compatible devices.</strong> Wide color displays support a P3 color space that can produce richer, more saturated colors than sRGB. When the experience calls for vivid imagery, prepare images using the Display P3 color profile at 16 bits per pixel. For best results, these images should be saved as 16-bit .png files with the Display P3 profile embedded.</p>
+
+<div class="note">
+
+<p><strong>Tip</strong> On Macs with wide color displays, you can use the system color picker to select and preview P3 colors, and to compare them with sRGB colors.</p>
+
+</div>
+
+<p><strong>Avoid using the same color for interactive and noninteractive elements.</strong> If interactive and noninteractive elements have the same color, it’s hard for people to know where to tap.
+Consider how translucency affects colors. Colors can appear different when placed behind a translucent element, or when applied to a translucent element, such as a toolbar.</p>
+
+<p><strong>Test your app’s color scheme under a variety of lighting conditions.</strong> Lighting varies significantly both indoors and outdoors, based on room ambiance, time of day, the weather, and more. Colors you see on your computer won’t always look the same when your app is used in the real world. Always preview your app under multiple lighting conditions, including outdoors on a sunny day, to see how colors appear. If necessary, adjust colors to provide the best possible viewing experience in the majority of use cases.</p>
+
+<p><strong>Consider how the True Tone display affects color.</strong> The True Tone display uses ambient light sensors to automatically adjust the white point of the display to adapt to the lighting conditions of the current environment. Apps that focus primarily on reading, photos, video, and gaming can strengthen or weaken this effect by specifying a white point adaptivity style. For implementation details, see <a href="https://developer.apple.com/library/content/documentation/General/Reference/InfoPlistKeyReference/Introduction/Introduction.html" onclick="s_objectID=&quot;https://developer.apple.com/library/content/documentation/General/Reference/InfoPlistKeyReference_1&quot;;return this.s_oc?this.s_oc(e):true">Information Property List Key Reference</a>.</p>
+
+<p><strong>Be aware of colorblindness and how different cultures perceive color.</strong> People see colors differently. Many colorblind people, for example, find it difficult to distinguish red from green (and either color from gray), or blue from orange. Avoid using these color combinations as the only way to distinguish between two states or values. For example, instead of using red and green circles to indicate offline and online, use a red square and a green circle. Some image-editing software includes tools that can help you proof for colorblindness. Also consider how your use of color might be perceived in other countries and cultures. In some cultures, for example, red is used to communicate danger. In others, red has positive connotations. Make sure the colors in your app send the appropriate message.</p>
+
+<p><strong>Use sufficient color contrast ratios.</strong> Insufficient contrast in your app makes content hard to read for everyone. Icons and text might blend with the background, for example. An online color contrast calculator can help you accurately analyze the color contrast in your app, to ensure that it meets optimal standards. Strive for a minimum contrast ratio of 4.5:1, although 7:1 is preferred because it meets more stringent accessibility standards.</p>
+
+<div class="col-80 hig-content" data-hires="true">
+            <h2 id="branding">Branding</h2>
+
+<p>Successful branding involves more than just adding brand assets to your app. Great apps express unique brand identity through smart font, color, and image decisions. Provide enough branding to give people context in your app, but not so much that it becomes a distraction.</p>
+
+<p><strong>Incorporate refined, unobtrusive branding.</strong> People use your app to be entertained, get information, or get things done, not to watch an advertisement. For the best experience, subtly incorporate your brand through your app’s design. Using colors from your app icon throughout your interface is one great way to provide context in your app.</p>
+
+<p><strong>Don’t let branding get in the way of great app design.</strong> Above all, make your app feel like an iOS app. Ensure that it's intuitive, easy to navigate, easy to use, and focuses on content. Even if your app is available on other platforms, avoid diluting your design by focusing too much on consistent branding.</p>
+
+<p><strong>Defer to content over branding.</strong> Showing a persistent bar at the top of the screen that does nothing but display brand assets means there’s less room for viewing content. Instead, consider less intrusive ways to implement branding, such as using a custom color scheme or font, or subtly customizing the background.</p>
+
+<p><strong>Resist the temptation to display your logo throughout your app.</strong> Avoid displaying a logo throughout your app unless it’s necessary for providing context. This is especially important in navigation bars, where a title is more helpful.</p>
+
+<p><strong>Adhere to Apple's trademark guidelines.</strong> Apple Trademarks should not appear in your app name or imagery. See <a href="https://www.apple.com/legal/intellectual-property/trademark/appletmlist.html" onclick="s_objectID=&quot;https://www.apple.com/legal/intellectual-property/trademark/appletmlist.html_1&quot;;return this.s_oc?this.s_oc(e):true">Apple Trademark List</a> and <a href="https://www.apple.com/legal/intellectual-property/guidelinesfor3rdparties.html" onclick="s_objectID=&quot;https://www.apple.com/legal/intellectual-property/guidelinesfor3rdparties.html_1&quot;;return this.s_oc?this.s_oc(e):true">Guidelines for Using Apple Trademarks</a>.</p>
+
+<div class="note">
+
+<p><strong>Tip</strong> The App Store offers more opportunities to highlight your brand. For guidance, see about <a href="https://developer.apple.com/app-store/marketing/guidelines/" onclick="s_objectID=&quot;https://developer.apple.com/app-store/marketing/guidelines/_1&quot;;return this.s_oc?this.s_oc(e):true">App Store Marketing Guidelines</a>.</p>
+
+<h2 id="typography">Typography</h2>
+
+<p>San Francisco is the system font on iOS. There are two variants of this font: SF UI Text for text 19 points or smaller, and SF UI Display for text 20 points or larger. When you use the system font for text in labels and other interface elements, iOS automatically applies the most appropriate text style of the font based on the point size. It also switches fonts automatically as needed and respects accessibility settings.
+Download the San Francisco fonts in <a href="/ios/human-interface-guidelines/resources/" onclick="s_objectID=&quot;https://developer.apple.com/ios/human-interface-guidelines/resources/_3&quot;;return this.s_oc?this.s_oc(e):true">Resources</a>.</p>
+
+<p class="padding-top-small padding-bottom-small sosumi">iOS uses San Francisco as the system font for Latin, Greek and Cyrillic alphabets, and a variety of other typefaces for other scripts.</p>
+
+<p><strong>Emphasize important information.</strong> Use font weight, size, and color to highlight the most important information in your app.</p>
+
+<p><strong>If possible, use a single font.</strong> Mixing several different fonts can make your app seem fragmented and sloppy. Consider using one font and just a few styles and sizes.</p>
+
+<p><strong>Use built-in text styles whenever possible.</strong> The built-in text styles let you express content in ways that are visually distinct, while retaining optimal legibility. These styles are based on the system fonts and allow you to take advantage of key typographic features, such as Dynamic Type, which automatically adjusts tracking and leading for every font size. iOS includes the following text styles:</p>
+
+<p><strong>Make sure custom fonts are legible.</strong> Custom typefaces are supported on iOS, but are often tough to read. Unless your app has a compelling need for a custom font, such as for branding purposes or to create an immersive gaming experience, stick with the system fonts. If you do use a custom font, make sure it’s readable.</p>
+
+<p><strong>Implement accessibility features for custom fonts.</strong> System fonts automatically react to accessibility features, such as when bold text is enabled. Apps using custom fonts should implement the same behavior by checking whether accessibility features are enabled and registering for notifications when they change. See <a href="/ios/human-interface-guidelines/interaction/accessibility/" onclick="s_objectID=&quot;https://developer.apple.com/ios/human-interface-guidelines/interaction/accessibility/_3&quot;;return this.s_oc?this.s_oc(e):true">Accessibility</a>.</p>
+
+<h3 id="dynamic-type-sizes">Dynamic Type Sizes</h3>
+
+<p>Both variants of the SF&nbsp;UI typeface were designed to be highly legible at both small and large sizes. Dynamic Type provides additional flexibility by letting readers choose their preferred text size.</p>
+
+<p><strong>Prioritize content when responding to text-size changes.</strong> Not all content is equally important. When someone chooses a larger size, they want to make the content they care about easier to read; they don’t always want every word on the screen to be larger.</p>
+
+<p>Download a dynamic type size table in <a href="/ios/human-interface-guidelines/resources/#dynamic-type-sizes" onclick="s_objectID=&quot;https://developer.apple.com/ios/human-interface-guidelines/resources/#dynamic-type-sizes_1&quot;;return this.s_oc?this.s_oc(e):true">Resources</a>.</p>
+
+<h3 id="font-usage-and-tracking">Font Usage and Tracking</h3>
+
+<p><strong>Use the correct font variant in interface mockups.</strong> Use SF UI Text for text 19 points or smaller. Use SF UI Display for text 20 points or larger. Adjust tracking—the spacing between letters—appropriately, as follows:</p>
 
 
-<h2>Die Herkunft: Genossenschaftlich und Arbeitnehmerfreundlich (H2) </h2>
+<h2>Animation</h2>
 
-<p>Die <b>Bank Coop</b> mit Sitz in <a href="https://de.wikipedia.org/wiki/Basel" title="Basel">Basel</a> ist ein <a href="https://de.wikipedia.org/wiki/Schweiz" title="Schweiz">Schweizer</a> <a href="https://de.wikipedia.org/wiki/Bank" title="Bank">Bankunternehmen</a>. Ihr Haupttätigkeitsgebiet liegt im Retail-Banking für Privatpersonen und <a href="https://de.wikipedia.org/wiki/Kleine_und_mittlere_Unternehmen" title="Kleine und mittlere Unternehmen">kleine und mittlere Unternehmen</a>.</p>
-<p>Die Bank Coop wurde am 30. Oktober 1927 vom Verband Schweizerischer Konsumvereine (heute <a href="https://de.wikipedia.org/wiki/Coop_(Schweiz)" title="Coop (Schweiz)">Coop</a>) zusammen mit dem <a href="https://de.wikipedia.org/wiki/Schweizerischer_Gewerkschaftsbund" title="Schweizerischer Gewerkschaftsbund">Schweizerischen Gewerkschaftsbund</a> als <i>Genossenschaftliche Zentralbank</i> gegründet.</p>
+<p>Beautiful, subtle animation throughout iOS builds a visual sense of connection between people and content onscreen. When used appropriately, animation can convey status, provide feedback, enhance the sense of direct manipulation, and help users visualize the results of their actions.</p>
 
-<h2>Kritik (H2)</h2>
+<p><strong>Use animation and motion effects judiciously.</strong> Don’t use animation for the sake of using animation. Excessive or gratuitous animation can make people feel disconnected or distracted, especially in apps that don’t provide an immersive experience. iOS uses motion effects, such as a parallax effect, to create the perception of depth on the Home screen and in other areas. These effects can increase understanding and enjoyment, but overusing them can make an app feel disorienting and difficult to control. If you implement motion effects, always test the results to make sure they work well.</p>
 
-<h3>Falschversand von Kundenabrechnungen (H3)</h3>
+<p><strong>Strive for realism and credibility.</strong> People tend to accept artistic license, but they can feel disoriented when movement doesn’t make sense or appears to defy physical laws. If someone reveals a view by sliding it down from the top of the screen, for example, they should be able dismiss the view by sliding it back up.</p>
 
-<p>Die Endabrechnungen von einem Teil der Kunden für das Jahr 2013 wurden durch einen Programmfehler fälschlicherweise an falsche Adressen verschickt.<sup id="cite_ref-5" class="reference"><a href="#cite_note-5">[5]</a></sup><sup id="cite_ref-6" class="reference"><a href="#cite_note-6">[6]</a></sup><sup id="cite_ref-7" class="reference"><a href="#cite_note-7">[7]</a></sup> Im Juni 2014 teilte die Bank Coop mit, dass ein unabhängiger Untersuchungsbericht der <a href="https://de.wikipedia.org/wiki/Deloitte" title="Deloitte">Deloitte</a> AG zum Ergebnis kam, dass eine Verkettung ungünstiger Umstände und ungenügender Kontrollen zum Falschversand führten. Durch Fehler bei der Einführung einer neuen Kontoauszugs-Beilage wurden Auszüge von 43'000 Kunden bei anderen Adressaten beigelegt, 31'000 Kunden erhielten Endabrechnungen von sich und von anderen Personen.</p>
+<p><strong>Use consistent animation.</strong> A familiar, flowing experience keeps users engaged. They're accustomed to the subtle animation used throughout iOS, such as smooth transitions, fluid changes in device orientation, and physics-based scrolling. Unless you’re creating an immersive experience, such as a game, custom animation should be comparable to the built-in animations.</p>
 
-<h3>Kursmanipulation (H3)</h3>
-<h4>Dreijähriges Berufsverbot für Andreas Waespi (H4)</h4>
-<p>Die <a href="https://de.wikipedia.org/wiki/Eidgen%C3%B6ssische_Finanzmarktaufsicht" title="Eidgenössische Finanzmarktaufsicht">Eidgenössische Finanzmarktaufsicht</a> (FINMA) rügte die Bank Coop im Oktober 2014. Die Bank hatte zwischen 2009 und 2013 den Börsenkurs der eigenen Inhaberaktien manipuliert. Es sei zu «erheblichen Stützungskäufen» gekommen, um einem Sinken des Kurses entgegenzuwirken. Damit hat die Bank in schwerer Weise gegen das aufsichtsrechtliche Verbot der Marktmanipulation und gegen ihre Gewährs- und Organisationspflichten verstossen. Gegen den früheren Vorsitzenden der <a href="https://de.wikipedia.org/wiki/Gesch%C3%A4ftsleitung" class="mw-redirect mw-disambig" title="Geschäftsleitung">Geschäftsleitung</a> Andreas Waespi, der die Bank Anfang August 2014 verlassen hatte, erliess die FINMA ein dreijähriges Berufsverbot.</p>
-
-
-<h2>Nachhaltigkeit (H2)</h2>
-
-<h3>Engagement für Umwelt und Gesellschaft (H3)</h3>
-
-<p>Verantwortungsvolles Handeln dient der Sicherstellung unseres Unternehmenserfolges. Wir sind uns allerdings bewusst, dass die gleichrangige Verfolgung von ökonomischen, ökologischen und gesellschaftlichen Ansprüchen durchaus auch an Grenzen stossen kann. Dies soll kein Hinderungsgrund sein, unsere Ziele konsequent weiterzuverfolgen. Denn wir verstehen unser Engagement nicht nur als eine unternehmerische Herausforderung, sondern auch als Beitrag zu einer zukunftsfähigen Entwicklung der Schweiz.</p>
-
-<h2>Standort (H2)</h2>
-<p>Basel ist ein Zentrum der Chemie- und Pharmaindustrie. So haben unter anderem die beiden Pharmafirmen Novartis und Hoffmann-La Roche ihren Hauptsitz in Basel. <strong>Basel bildet einen Eisenbahnknotenpunkt mit einem der grössten Rangierbahnhöfe Europas</strong> im benachbarten Muttenz. <img alt="Placeholder Image and Some Alt Text" src="http://placehold.it/350x150" title="A title element for this placeholder image."> Mit den Frachthäfen der Region Basel, den einzigen der Schweiz, besteht über den Rhein eine Wasserstrassenverbindung zur Nordsee. Der im Elsass auf französischem Staatsgebiet liegende Flughafen Basel-Mülhausen wird gemeinsam mit den beiden Nachbarn in Frankreich betrieben. 1460 wurde in Basel die erste schweizerische Hochschule gegründet. In Basel fand 1897 ausserdem der erste Zionistische Weltkongress statt. 2015 wurde Basel der Ehrentitel „Reformationsstadt Europas“ durch die Gemeinschaft Evangelischer Kirchen in Europa verliehen.</p>
+<p><strong>Make animations optional.</strong> When the option to reduce motion is enabled in accessibility preferences, your app should minimize or eliminate application animations.</p>
