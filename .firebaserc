@@ -1,5 +1,6 @@
 {
   "projects": {
-    "staging": "smart-styler"
+    "staging": "smart-styler",
+    "live": "stylescratchpad"
   }
 }
