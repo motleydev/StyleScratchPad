@@ -14,6 +14,7 @@ In the color tab, you can add/remove color swatches by providing any valid css s
 ![Screenshot](./images/color-settings.png)
 
 From left to right, the values are:
+
 1. Legibility at 14pt font-size
 2. Legibility at 18pt font-size
 3. General Color Contrast
